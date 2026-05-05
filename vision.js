@@ -33,7 +33,7 @@ let state = {
   theme: params.get("theme") || "beige",
   font: params.get("font") || "default",
   gridSize: parseInt(params.get("gridSize")) || 3,
-  tiles: []
+  tiles: [],
   widgetSize: params.get("widgetSize") || "medium",
 };
 

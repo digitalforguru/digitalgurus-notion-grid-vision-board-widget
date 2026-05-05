@@ -245,6 +245,23 @@ imageUpload?.addEventListener("change", async (e) => {
 const tabs = document.querySelectorAll(".icon-tab");
 const icons = document.querySelectorAll(".icon-option");
 
+icons.forEach(icon => {
+  icon.addEventListener("click", () => {
+    const iconId = icon.dataset.icon;
+
+    const sticker = {
+      id: Date.now() + Math.random(),
+      icon: iconId,
+      src: `./assets/icons/${iconId}.svg`,
+      x: 120,
+      y: 120
+    };
+
+    state.stickers.push(sticker);
+    renderStickers();
+  });
+});
+
 tabs.forEach(tab => {
   tab.addEventListener("click", () => {
     const category = tab.dataset.category;
@@ -272,8 +289,7 @@ function renderStickers() {
     const el = document.createElement("div");
     el.className = "sticker";
     el.dataset.id = sticker.id;
-
-    const src = sticker.src || `./assets/icons/${sticker.icon}.svg`;
+    const src = sticker.src || (sticker.icon ? `./assets/icons/${sticker.icon}.svg` : "");
 
     const img = document.createElement("img");
     img.src = src;

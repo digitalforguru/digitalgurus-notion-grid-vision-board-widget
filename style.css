@@ -527,3 +527,17 @@ body {
   background: #111;
   color: white;
 }
+
+.draggable-title {
+  cursor: grab;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: 10;
+}
+
+.draggable-title:active {
+  cursor: grabbing;
+}

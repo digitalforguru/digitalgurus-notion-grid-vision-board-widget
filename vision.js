@@ -73,6 +73,7 @@ let state = {
   tiles: [],
   widgetSize: params.get("widgetSize") || "medium",
   titleStyle: params.get("titleStyle") || "plain",
+  titlePosition: params.get("titlePosition") || "top-center",
 };
 
 async function uploadImage(file) {
@@ -92,6 +93,25 @@ async function uploadImage(file) {
     .getPublicUrl(fileName);
 
   return data.publicUrl;
+}
+function setTitlePosition(pos) {
+  state.titlePosition = pos;
+
+  titleDisplay.classList.remove(
+    "title-pos-top-left",
+    "title-pos-top-center",
+    "title-pos-center",
+    "title-pos-floating"
+  );
+
+  titleDisplay.classList.add(`title-pos-${pos}`);
+
+  // if not floating → disable dragging
+  if (pos !== "floating") {
+    titleDisplay.style.cursor = "default";
+  } else {
+    titleDisplay.style.cursor = "grab";
+  }
 }
 
 function setTitleStyle(style) {
@@ -179,7 +199,11 @@ imageUpload?.addEventListener("change", async (e) => {
 
 /* ---------------- GRID SIZE ---------------- */
 
-
+document.querySelectorAll("#titlePositionOptions .pill-option").forEach(el => {
+  el.addEventListener("click", () => {
+    setTitlePosition(el.dataset.pos);
+  });
+});
 /* ---------------- TITLE INPUT ---------------- */
 titleInput?.addEventListener("input", (e) => {
   state.title = e.target.value || "my vision board";
@@ -254,7 +278,7 @@ function buildEmbedURL() {
 
   const tiles = encodeURIComponent(JSON.stringify(state.tiles));
 
-  return `${base}?title=${encodeURIComponent(state.title)}&gridSize=${state.gridSize}&tiles=${tiles}&theme=${state.theme}&font=${state.font}&widgetSize=${state.widgetSize}&titleStyle=${state.titleStyle}&embed=true`;
+  return `${base}?title=${encodeURIComponent(state.title)}&gridSize=${state.gridSize}&tiles=${tiles}&theme=${state.theme}&font=${state.font}&widgetSize=${state.widgetSize}&titleStyle=${state.titleStyle}&titlePosition=${state.titlePosition}&embed=true`;
 }
 
 document.querySelectorAll("#titleStyleOptions .pill-option").forEach(el => {
@@ -285,6 +309,7 @@ setWidgetSize(state.widgetSize);
   if (titleInput) titleInput.value = state.title;
 setWidgetSize(state.widgetSize);
 setTitleStyle(state.titleStyle);
+  setTitlePosition(state.titlePosition);
 
   setTheme(state.theme);
   setFont(state.font);

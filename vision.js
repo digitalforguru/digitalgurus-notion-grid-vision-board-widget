@@ -38,7 +38,7 @@ let state = {
 async function uploadImage(file) {
   const fileName = `${Date.now()}-${file.name}`;
 
-  const { error } = await supabase.storage
+  const { error } = await db.storage
     .from("vision-images")
     .upload(fileName, file);
 
@@ -47,7 +47,7 @@ async function uploadImage(file) {
     return null;
   }
 
-  const { data } = supabase.storage
+  const { data } = db.storage
     .from("vision-images")
     .getPublicUrl(fileName);
 

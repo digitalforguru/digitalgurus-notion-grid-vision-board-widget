@@ -437,7 +437,7 @@ body {
 
 .vision-grid {
   display: grid;
-  gap: 1.5px;
+  gap: 1px;
 
   width: 100%;
   flex: 1;              /* 👈 allows expansion */
@@ -445,7 +445,7 @@ body {
   align-content: start;
 }
 .vision-grid {
-  padding: 1.5px;
+  padding: 1px;
 }
 .vision-grid {
   grid-auto-rows: 1fr;

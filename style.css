@@ -44,15 +44,15 @@ body {
 }
 
 .widget.size-small {
-  transform: scale(0.85);
+  transform: scale(0.45);
 }
 
 .widget.size-medium {
-  transform: scale(1);
+  transform: scale(0.80);
 }
 
 .widget.size-large {
-  transform: scale(1.15);
+  transform: scale(0.90);
 }
 
 

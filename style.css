@@ -429,12 +429,15 @@ body {
 
 .vision-grid {
   display: grid;
-  gap: 8px;
+  gap: 3px;
 
   width: 100%;
   flex: 1;              /* 👈 allows expansion */
 
   align-content: start;
+}
+.vision-grid {
+  padding: 2px;
 }
 .vision-grid {
   grid-auto-rows: 1fr;
@@ -449,15 +452,24 @@ body {
   width: 100%;
   aspect-ratio: 1 / 1;
 
-  border-radius: 6px; /* 👈 sharper (was 14px) */
+  border-radius: 4px; /* sharper = more collage */
 
   overflow: hidden;
 
   background: #f5f5f5;
 
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  box-shadow: none; /* 👈 IMPORTANT: removes separation */
 
   transition: transform 0.2s ease;
+}
+.vision-tile {
+  position: relative;
+}
+
+.vision-tile:hover {
+  transform: scale(1.04);
+  z-index: 3;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
 }
 
 .vision-tile img {
@@ -469,10 +481,6 @@ body {
   border-radius: 0; /* 👈 removes image rounding completely */
 }
 
-.vision-tile:hover {
-  transform: scale(1.02);
-  z-index: 2;
-}
 
 .divider {
   opacity: 0.4;

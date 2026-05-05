@@ -74,6 +74,7 @@ let state = {
   widgetSize: params.get("widgetSize") || "medium",
   titleStyle: params.get("titleStyle") || "plain",
   titlePosition: params.get("titlePosition") || "top-center",
+  messiness: parseInt(params.get("messiness")) || 0,
 };
 
 async function uploadImage(file) {
@@ -93,6 +94,47 @@ async function uploadImage(file) {
     .getPublicUrl(fileName);
 
   return data.publicUrl;
+}
+
+function applyMessiness() {
+  const tiles = document.querySelectorAll(".vision-tile");
+
+  tiles.forEach((tile, index) => {
+    let rotation = 0;
+    let scale = 1;
+    let offsetX = 0;
+    let offsetY = 0;
+    let z = index;
+
+    if (state.messiness === 1) {
+      rotation = (Math.random() - 0.5) * 4;
+      scale = 1 + (Math.random() * 0.05);
+    }
+
+    if (state.messiness === 2) {
+      rotation = (Math.random() - 0.5) * 10;
+      scale = 1 + (Math.random() * 0.1);
+      offsetX = (Math.random() - 0.5) * 6;
+      offsetY = (Math.random() - 0.5) * 6;
+      z = Math.floor(Math.random() * 10);
+    }
+
+    if (state.messiness === 3) {
+      rotation = (Math.random() - 0.5) * 18;
+      scale = 1 + (Math.random() * 0.2);
+      offsetX = (Math.random() - 0.5) * 12;
+      offsetY = (Math.random() - 0.5) * 12;
+      z = Math.floor(Math.random() * 20);
+    }
+
+    tile.style.transform = `
+      translate(${offsetX}px, ${offsetY}px)
+      rotate(${rotation}deg)
+      scale(${scale})
+    `;
+
+    tile.style.zIndex = z;
+  });
 }
 function setTitlePosition(pos) {
   state.titlePosition = pos;
@@ -198,6 +240,18 @@ imageUpload?.addEventListener("change", async (e) => {
 });
 
 /* ---------------- GRID SIZE ---------------- */
+document.querySelectorAll("#messinessOptions .pill-option").forEach(el => {
+  el.addEventListener("click", () => {
+    state.messiness = parseInt(el.dataset.mess);
+
+    document.querySelectorAll("#messinessOptions .pill-option")
+      .forEach(btn => btn.classList.remove("active"));
+
+    el.classList.add("active");
+
+    applyMessiness();
+  });
+});
 
 document.querySelectorAll("#titlePositionOptions .pill-option").forEach(el => {
   el.addEventListener("click", () => {
@@ -278,7 +332,7 @@ function buildEmbedURL() {
 
   const tiles = encodeURIComponent(JSON.stringify(state.tiles));
 
-  return `${base}?title=${encodeURIComponent(state.title)}&gridSize=${state.gridSize}&tiles=${tiles}&theme=${state.theme}&font=${state.font}&widgetSize=${state.widgetSize}&titleStyle=${state.titleStyle}&titlePosition=${state.titlePosition}&embed=true`;
+  return `${base}?title=${encodeURIComponent(state.title)}&gridSize=${state.gridSize}&tiles=${tiles}&theme=${state.theme}&font=${state.font}&widgetSize=${state.widgetSize}&titleStyle=${state.titleStyle}&titlePosition=${state.titlePosition}&messiness=${state.messiness}&embed=true`;
 }
 
 document.querySelectorAll("#titleStyleOptions .pill-option").forEach(el => {
@@ -317,6 +371,9 @@ setTitleStyle(state.titleStyle);
   updateGrid();
   updateTitle();
   renderBoard();
+  applyMessiness();
+  
+});
 }
 /* ---------------- DRAGGABLE TITLE ---------------- */
 

@@ -39,7 +39,6 @@ gridOptions.forEach(btn => {
   });
 });
 
-
 /* WIDGET SIZE PILLS */
 const widgetOptions = document.querySelectorAll(".pill-option[data-size]");
 
@@ -137,6 +136,7 @@ function applyMessiness() {
     tile.style.zIndex = z;
   });
 }
+
 function setTitlePosition(pos) {
   state.titlePosition = pos;
 
@@ -149,7 +149,6 @@ function setTitlePosition(pos) {
 
   titleDisplay.classList.add(`title-pos-${pos}`);
 
-  // if not floating → disable dragging
   if (pos !== "floating") {
     titleDisplay.style.cursor = "default";
   } else {
@@ -176,7 +175,6 @@ function setWidgetSize(size) {
   widget.classList.remove("size-small", "size-medium", "size-large");
   widget.classList.add(`size-${size}`);
 }
-
 
 if (params.get("tiles")) {
   try {
@@ -222,7 +220,7 @@ function updateTitle() {
   titleDisplay.textContent = state.title.toLowerCase();
 }
 
-/* ---------------- IMAGE UPLOAD (SUPABASE) ---------------- */
+/* ---------------- IMAGE UPLOAD ---------------- */
 imageUpload?.addEventListener("change", async (e) => {
   const files = Array.from(e.target.files);
 
@@ -240,6 +238,7 @@ imageUpload?.addEventListener("change", async (e) => {
   renderBoard();
 });
 
+/* ---------------- ICON TABS (FIXED) ---------------- */
 const tabs = document.querySelectorAll(".icon-tab");
 const icons = document.querySelectorAll(".icon-option");
 
@@ -247,7 +246,6 @@ tabs.forEach(tab => {
   tab.addEventListener("click", () => {
     const category = tab.dataset.category;
 
-    // active tab styling
     tabs.forEach(t => t.classList.remove("active"));
     tab.classList.add("active");
 
@@ -263,165 +261,26 @@ tabs.forEach(tab => {
   });
 });
 
-function renderStickers() {
-  const board = document.getElementById("visionGrid");
+/* ---------------- ICON CLICK (SINGLE SOURCE ONLY FIX) ---------------- */
+document.querySelectorAll(".icon-option").forEach(icon => {
+  icon.addEventListener("click", () => {
+    const iconId = icon.dataset.icon;
 
-  // remove old stickers (but keep images)
-  document.querySelectorAll(".sticker").forEach(s => s.remove());
-
-  state.stickers.forEach(sticker => {
-    const el = document.createElement("img");
-
-    el.src = `./assets/icons/${sticker.icon}.svg`;
-    el.classList.add("sticker");
-
-    el.style.position = "absolute";
-    el.style.left = sticker.x + "px";
-    el.style.top = sticker.y + "px";
-    el.style.width = "32px";
-    el.style.height = "32px";
-    el.style.cursor = "grab";
-
-    makeDraggable(el, sticker);
-
-    document.getElementById("widget").appendChild(el);
-  });
-}
-
-function makeDraggable(el, sticker) {
-  let isDragging = false;
-  let offsetX = 0;
-  let offsetY = 0;
-
-  el.addEventListener("mousedown", (e) => {
-    isDragging = true;
-    offsetX = e.clientX - el.offsetLeft;
-    offsetY = e.clientY - el.offsetTop;
-  });
-
-  document.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
-
-    const x = e.clientX - offsetX;
-    const y = e.clientY - offsetY;
-
-    el.style.left = x + "px";
-    el.style.top = y + "px";
-
-    // update state LIVE
-    sticker.x = x;
-    sticker.y = y;
-  });
-
-  document.addEventListener("mouseup", () => {
-    isDragging = false;
-  });
-}
-/* ---------------- GRID SIZE ---------------- */
-document.querySelectorAll("#messinessOptions .pill-option").forEach(el => {
-  el.addEventListener("click", () => {
-    state.messiness = parseInt(el.dataset.mess);
-
-    document.querySelectorAll("#messinessOptions .pill-option")
-      .forEach(btn => btn.classList.remove("active"));
-
-    el.classList.add("active");
-
-    applyMessiness();
-  });
-});
-
-document.querySelectorAll("#titlePositionOptions .pill-option").forEach(el => {
-  el.addEventListener("click", () => {
-    setTitlePosition(el.dataset.pos);
-  });
-});
-/* ---------------- TITLE INPUT ---------------- */
-titleInput?.addEventListener("input", (e) => {
-  state.title = e.target.value || "my vision board";
-  updateTitle();
-});
-
-/* ---------------- THEME ---------------- */
-function setTheme(theme) {
-  state.theme = theme;
-
-  widget.classList.remove("beige", "pink", "blue", "green");
-  widget.classList.add(theme);
-}
-
-/* ---------------- FONT ---------------- */
-function setFont(font) {
-  state.font = font;
-
-  widget.classList.remove("font-default", "font-serif", "font-mono");
-  widget.classList.add(`font-${font}`);
-}
-
-/* ---------------- POPUPS ---------------- */
-editBtn?.addEventListener("click", (e) => {
-  e.stopPropagation();
-  editOptions.classList.toggle("hidden");
-});
-
-themeBtn?.addEventListener("click", (e) => {
-  e.stopPropagation();
-  themeOptions.classList.toggle("hidden");
-});
-
-fontBtn?.addEventListener("click", (e) => {
-  e.stopPropagation();
-  fontOptions.classList.toggle("hidden");
-});
-
-/* ---------------- OPTIONS ---------------- */
-document.querySelectorAll(".theme-circle").forEach(el => {
-  el.addEventListener("click", () => {
-    setTheme(el.dataset.theme);
-    themeOptions.classList.add("hidden");
-  });
-});
-
-document.querySelectorAll(".font-option").forEach(el => {
-  el.addEventListener("click", () => {
-    setFont(el.dataset.font);
-    fontOptions.classList.add("hidden");
-  });
-});
-
-/* ---------------- OUTSIDE CLICK ---------------- */
-document.addEventListener("click", (e) => {
-  if (!editBtn?.contains(e.target) && !editOptions?.contains(e.target)) {
-    editOptions?.classList.add("hidden");
-  }
-
-  if (!themeBtn?.contains(e.target) && !themeOptions?.contains(e.target)) {
-    themeOptions?.classList.add("hidden");
-  }
-
-  if (!fontBtn?.contains(e.target) && !fontOptions?.contains(e.target)) {
-    fontOptions?.classList.add("hidden");
-  }
-});
-document.querySelectorAll(".icon-option").forEach(el => {
-  el.addEventListener("click", () => {
-    const iconId = el.dataset.icon;
-
-    const sticker = {
+    state.stickers.push({
       id: Date.now() + Math.random(),
       src: `./assets/icons/${iconId}.svg`,
       x: 120,
       y: 120,
       scale: 1,
       rotation: 0
-    };
+    });
 
-    state.stickers.push(sticker);
     renderStickers();
   });
 });
+
+/* ---------------- STICKERS ---------------- */
 function renderStickers() {
-  // remove old
   document.querySelectorAll(".sticker").forEach(s => s.remove());
 
   state.stickers.forEach(sticker => {
@@ -429,12 +288,13 @@ function renderStickers() {
 
     const src = sticker.src || `./assets/icons/${sticker.icon}.svg`;
 
-el.src = src;
+    el.src = src;
 
-el.onerror = () => {
-  console.warn("Missing icon:", src);
-  el.style.display = "none";
-};
+    el.onerror = () => {
+      console.warn("Missing icon:", src);
+      el.style.display = "none";
+    };
+
     el.className = "sticker";
     el.dataset.id = sticker.id;
 
@@ -447,9 +307,10 @@ el.onerror = () => {
 
     makeStickerDraggable(el, sticker);
 
-    widget.appendChild(el); // 👈 IMPORTANT (on top of everything)
+    widget.appendChild(el);
   });
 }
+
 function makeStickerDraggable(el, sticker) {
   let dragging = false;
   let offsetX = 0;
@@ -482,36 +343,6 @@ function makeStickerDraggable(el, sticker) {
     el.style.cursor = "grab";
   });
 }
-/* ---------------- EMBED LINK ---------------- */
-function buildEmbedURL() {
-  const base = window.location.origin + window.location.pathname;
-  const stickers = encodeURIComponent(JSON.stringify(state.stickers));
-
-  const tiles = encodeURIComponent(JSON.stringify(state.tiles));
-
-  return `${base}?title=${encodeURIComponent(state.title)}&gridSize=${state.gridSize}&tiles=${tiles}&theme=${state.theme}&font=${state.font}&widgetSize=${state.widgetSize}&titleStyle=${state.titleStyle}&titlePosition=${state.titlePosition}&messiness=${state.messiness}&stickers=${stickers}&embed=true`;
-}
-
-document.querySelectorAll("#titleStyleOptions .pill-option").forEach(el => {
-  el.addEventListener("click", () => {
-    setTitleStyle(el.dataset.style);
-  });
-});
-/* ---------------- COPY ---------------- */
-copyBtn?.addEventListener("click", () => {
-  navigator.clipboard.writeText(buildEmbedURL());
-
-  const msg = document.getElementById("copyMessage");
-  if (!msg) return;
-
-  msg.classList.remove("hidden");
-  msg.classList.add("show");
-
-  setTimeout(() => {
-    msg.classList.add("hidden");
-    msg.classList.remove("show");
-  }, 2000);
-});
 
 /* ---------------- INIT ---------------- */
 function init() {
@@ -519,13 +350,14 @@ function init() {
   setWidgetSize(state.widgetSize);
 
   if (titleInput) titleInput.value = state.title;
+
   if (params.get("stickers")) {
-  try {
-    state.stickers = JSON.parse(decodeURIComponent(params.get("stickers")));
-  } catch (e) {
-    state.stickers = [];
+    try {
+      state.stickers = JSON.parse(decodeURIComponent(params.get("stickers")));
+    } catch (e) {
+      state.stickers = [];
+    }
   }
-}
 
   setTitleStyle(state.titleStyle);
   setTitlePosition(state.titlePosition);
@@ -536,11 +368,11 @@ function init() {
   updateGrid();
   updateTitle();
   renderBoard();
-  renderStickers(); // 👈 NEW
+  renderStickers();
   applyMessiness();
 }
-/* ---------------- DRAGGABLE TITLE ---------------- */
 
+/* ---------------- DRAG TITLE ---------------- */
 let isDragging = false;
 let offsetX = 0;
 let offsetY = 0;

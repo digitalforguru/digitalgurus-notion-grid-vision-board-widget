@@ -21,6 +21,7 @@ const fontBtn = document.getElementById("fontToggle");
 const fontOptions = document.getElementById("fontOptions");
 
 const copyBtn = document.getElementById("copyLinkBtn");
+const widgetSizeSelect = document.getElementById("widgetSizeSelect");
 
 /* ---------------- URL PARAMS ---------------- */
 const params = new URLSearchParams(window.location.search);
@@ -33,6 +34,7 @@ let state = {
   font: params.get("font") || "default",
   gridSize: parseInt(params.get("gridSize")) || 3,
   tiles: []
+  widgetSize: params.get("widgetSize") || "medium",
 };
 
 async function uploadImage(file) {
@@ -54,6 +56,15 @@ async function uploadImage(file) {
   return data.publicUrl;
 }
 
+function setWidgetSize(size) {
+  state.widgetSize = size;
+
+  widget.classList.remove("size-small", "size-medium", "size-large");
+  widget.classList.add(`size-${size}`);
+}
+widgetSizeSelect?.addEventListener("change", (e) => {
+  setWidgetSize(e.target.value);
+});
 
 if (params.get("tiles")) {
   try {
@@ -197,7 +208,7 @@ function buildEmbedURL() {
 
   const tiles = encodeURIComponent(JSON.stringify(state.tiles));
 
-  return `${base}?title=${encodeURIComponent(state.title)}&gridSize=${state.gridSize}&tiles=${tiles}&theme=${state.theme}&font=${state.font}&embed=true`;
+  return `${base}?title=${encodeURIComponent(state.title)}&gridSize=${state.gridSize}&tiles=${tiles}&theme=${state.theme}&font=${state.font}&widgetSize=${state.widgetSize}&embed=true`;
 }
 
 /* ---------------- COPY ---------------- */
@@ -220,6 +231,8 @@ copyBtn?.addEventListener("click", () => {
 function init() {
   if (gridSizeSelect) gridSizeSelect.value = state.gridSize;
   if (titleInput) titleInput.value = state.title;
+  if (widgetSizeSelect) widgetSizeSelect.value = state.widgetSize;
+setWidgetSize(state.widgetSize);
 
   setTheme(state.theme);
   setFont(state.font);

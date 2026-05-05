@@ -281,6 +281,9 @@ body {
 
   z-index: 50;
 }
+.sign-popup.large {
+  width: 280px;
+}
 .sign-title {
   font-size: 10px;
   opacity: 0.6;

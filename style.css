@@ -32,6 +32,19 @@ body {
 }
 
 /* =========================
+   🌿 VISION BOARD WRAPPER ALIGNMENT (ADDED)
+========================= */
+
+.widget {
+  backdrop-filter: blur(10px);
+}
+
+.widget-content {
+  gap: 8px;
+  text-align: center;
+}
+
+/* =========================
    🌸 CONTENT WRAPPER
 ========================= */
 
@@ -94,14 +107,16 @@ body {
 ========================= */
 
 .btn {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
 
-  border-radius: 10px;
+  border-radius: 12px;
 
-  background: white;
+  background: rgba(255,255,255,0.85);
 
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+
+  backdrop-filter: blur(12px);
 
   display: flex;
   align-items: center;
@@ -115,7 +130,7 @@ body {
 }
 
 .btn:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px) scale(1.05);
 }
 
 /* =========================
@@ -130,6 +145,60 @@ body {
 
   display: flex;
   gap: 8px;
+}
+
+/* =========================
+   🌸 HEADER MATCH (ADDED)
+========================= */
+
+.widget-header {
+  font-size: 13px;
+  font-weight: 600;
+
+  letter-spacing: 0.4px;
+
+  padding: 10px 16px;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(14px);
+
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+
+  text-align: center;
+
+  color: #444;
+
+  margin-bottom: 6px;
+
+  text-transform: lowercase;
+}
+
+/* =========================
+   🌿 USAGE TIP MATCH (ADDED)
+========================= */
+
+.usage-tip {
+  font-size: 11px;
+  line-height: 1.4;
+
+  width: 260px;
+
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(12px);
+
+  padding: 14px;
+
+  border-radius: 18px;
+
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+
+  text-align: center;
+
+  color: #555;
+
+  text-transform: lowercase;
 }
 
 /* =========================
@@ -259,7 +328,6 @@ body {
   width: 100%;
 }
 
-/* default fallback */
 .vision-grid {
   grid-template-columns: repeat(3, 1fr);
 }
@@ -335,4 +403,40 @@ body {
 
 .icon-option:hover {
   transform: scale(1.05);
+}
+
+/* =========================
+   🌸 FOOTER MATCH (ADDED)
+========================= */
+
+.footer-links {
+  margin-top: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  font-size: 11px;
+
+  opacity: 0.65;
+
+  text-transform: lowercase;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: inherit;
+
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-link:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.divider {
+  opacity: 0.4;
 }

@@ -293,7 +293,7 @@ function renderStickers() {
     el.appendChild(img);
 
     // ✅ DRAG
-    makeStickerDraggable(el, sticker);
+    makeDraggable(el, sticker);
 
     // ✅ DELETE BUTTON (ONLY BUILDER MODE)
     if (!isEmbed) {

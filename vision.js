@@ -327,18 +327,19 @@ function makeDraggable(el, sticker) {
   });
 
   document.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
+  if (!isDragging) return;
 
-    const x = e.clientX - offsetX;
-    const y = e.clientY - offsetY;
+  const widgetRect = widget.getBoundingClientRect();
 
-    el.style.left = x + "px";
-    el.style.top = y + "px";
+  const x = e.clientX - widgetRect.left - offsetX;
+  const y = e.clientY - widgetRect.top - offsetY;
 
-    // update state LIVE
-    sticker.x = x;
-    sticker.y = y;
-  });
+  el.style.left = `${x}px`;
+  el.style.top = `${y}px`;
+
+  sticker.x = x;
+  sticker.y = y;
+});
 
   document.addEventListener("mouseup", () => {
     isDragging = false;

@@ -711,3 +711,29 @@ body {
 
   transform: translateY(-1px);
 }
+
+.sticker {
+  position: absolute;
+}
+
+.sticker-delete {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  background: rgba(0,0,0,0.75);
+  color: white;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sticker-delete:hover {
+  background: red;
+}

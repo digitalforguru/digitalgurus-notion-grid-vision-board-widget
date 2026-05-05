@@ -22,6 +22,43 @@ const fontOptions = document.getElementById("fontOptions");
 
 const copyBtn = document.getElementById("copyLinkBtn");
 const widgetSizeSelect = document.getElementById("widgetSizeSelect");
+const gridOptions = document.querySelectorAll(".pill-option[data-grid]");
+
+function setGridSize(size) {
+  state.gridSize = Number(size);
+  updateGrid();
+
+  gridOptions.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.grid == size);
+  });
+}
+
+gridOptions.forEach(btn => {
+  btn.addEventListener("click", () => {
+    setGridSize(btn.dataset.grid);
+  });
+});
+
+
+/* WIDGET SIZE PILLS */
+const widgetOptions = document.querySelectorAll(".pill-option[data-size]");
+
+function setWidgetSize(size) {
+  state.widgetSize = size;
+
+  widget.classList.remove("size-small", "size-medium", "size-large");
+  widget.classList.add(`size-${size}`);
+
+  widgetOptions.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.size === size);
+  });
+}
+
+widgetOptions.forEach(btn => {
+  btn.addEventListener("click", () => {
+    setWidgetSize(btn.dataset.size);
+  });
+});
 
 /* ---------------- URL PARAMS ---------------- */
 const params = new URLSearchParams(window.location.search);
@@ -62,9 +99,7 @@ function setWidgetSize(size) {
   widget.classList.remove("size-small", "size-medium", "size-large");
   widget.classList.add(`size-${size}`);
 }
-widgetSizeSelect?.addEventListener("change", (e) => {
-  setWidgetSize(e.target.value);
-});
+
 
 if (params.get("tiles")) {
   try {
@@ -129,10 +164,7 @@ imageUpload?.addEventListener("change", async (e) => {
 });
 
 /* ---------------- GRID SIZE ---------------- */
-gridSizeSelect?.addEventListener("change", (e) => {
-  state.gridSize = parseInt(e.target.value);
-  updateGrid();
-});
+
 
 /* ---------------- TITLE INPUT ---------------- */
 titleInput?.addEventListener("input", (e) => {
@@ -229,9 +261,9 @@ copyBtn?.addEventListener("click", () => {
 
 /* ---------------- INIT ---------------- */
 function init() {
-  if (gridSizeSelect) gridSizeSelect.value = state.gridSize;
+  setGridSize(state.gridSize);
+setWidgetSize(state.widgetSize);
   if (titleInput) titleInput.value = state.title;
-  if (widgetSizeSelect) widgetSizeSelect.value = state.widgetSize;
 setWidgetSize(state.widgetSize);
 
   setTheme(state.theme);

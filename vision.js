@@ -347,13 +347,17 @@ function makeDraggable(el, sticker) {
     offsetY = e.clientY - el.offsetTop;
   });
 
-  document.addEventListener("mousemove", (e) => {
+ document.addEventListener("mousemove", (e) => {
   if (!isDragging) return;
 
   const widgetRect = widget.getBoundingClientRect();
 
-  const x = e.clientX - widgetRect.left - offsetX;
-  const y = e.clientY - widgetRect.top - offsetY;
+  let x = e.clientX - widgetRect.left - offsetX;
+  let y = e.clientY - widgetRect.top - offsetY;
+
+  // 🧱 CLAMP inside widget (this is the magic fix)
+  x = Math.max(0, Math.min(x, widgetRect.width - el.offsetWidth));
+  y = Math.max(0, Math.min(y, widgetRect.height - el.offsetHeight));
 
   el.style.left = `${x}px`;
   el.style.top = `${y}px`;

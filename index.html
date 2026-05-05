@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DigitalGuru Vision Board Widget</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<!-- 🌸 BUILDER UI -->
+<div class="builder-ui">
+
+  <div class="widget-header">
+    DigitalGuru Vision Board ✦ Builder
+  </div>
+
+  <!-- TIP BOX -->
+  <div id="usageTip" class="usage-tip">
+    build your vision board ✧  
+    - upload images  
+    - choose grid size  
+    - set title  
+    - customize theme + font  
+    - copy embed into notion  
+  </div>
+
+  <!-- CONTROLS (same system as your other widgets) -->
+  <div class="top-left-controls">
+
+    <!-- EDIT -->
+    <div id="editBtn" class="btn edit-btn" title="edit vision board">✏️</div>
+
+    <!-- THEME -->
+    <div id="themeBtn" class="btn theme-btn" title="select theme"></div>
+
+    <!-- FONT -->
+    <div id="fontToggle" class="btn font-toggle-btn" title="font">Aa</div>
+
+  </div>
+
+  <!-- ✏️ SETTINGS POPUP -->
+  <div id="editOptions" class="sign-popup hidden">
+
+    <div class="sign-title">vision board settings</div>
+
+    <div class="sub-text">
+      upload images ✦ set layout ✦ build your aesthetic board
+    </div>
+
+    <!-- TITLE -->
+    <div class="input-group">
+      <label>board title</label>
+      <input type="text" id="boardTitle" placeholder="e.g. 2026 glow up ✨" />
+    </div>
+
+    <!-- IMAGE UPLOAD -->
+    <div class="input-group">
+      <label>add images</label>
+      <input type="file" id="imageUpload" accept="image/*" multiple />
+    </div>
+
+    <!-- GRID SIZE -->
+    <div class="input-group">
+      <label>grid size</label>
+      <select id="gridSizeSelect">
+        <option value="2">2 x 2</option>
+        <option value="3" selected>3 x 3</option>
+        <option value="4">4 x 4</option>
+        <option value="5">5 x 5</option>
+      </select>
+    </div>
+
+  </div>
+
+  <!-- THEME POPUP -->
+  <div id="themeOptions" class="sign-popup hidden">
+    <div class="sign-title">select theme</div>
+
+    <div class="themes-row">
+      <div class="theme-circle pink" data-theme="pink"></div>
+      <div class="theme-circle beige" data-theme="beige"></div>
+      <div class="theme-circle blue" data-theme="blue"></div>
+      <div class="theme-circle green" data-theme="green"></div>
+    </div>
+  </div>
+
+  <!-- FONT POPUP -->
+  <div id="fontOptions" class="sign-popup hidden">
+    <div class="sign-title">select font</div>
+
+    <div class="font-list">
+      <div class="font-option" data-font="default">default</div>
+      <div class="font-option" data-font="serif">serif</div>
+      <div class="font-option" data-font="mono">mono</div>
+    </div>
+  </div>
+
+  <!-- COPY -->
+  <div class="setup-area">
+    <button id="copyLinkBtn" class="copy-btn">
+      copy my embed Notion link .ᐟ.ᐟ
+    </button>
+
+    <p id="copyMessage" class="copy-message hidden">
+      copied! paste into notion .ᐟ.ᐟ
+    </p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-links">
+    <a href="#" class="footer-link">shop templates</a>
+    <span class="divider">•</span>
+    <a href="#" class="footer-link">tiktok</a>
+  </div>
+
+</div>
+
+<!-- 🌿 WIDGET OUTPUT -->
+<div id="widget" class="widget">
+
+  <div class="widget-content">
+
+    <!-- TITLE -->
+    <div id="visionTitle" class="widget-title">
+      my vision board
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- GRID -->
+    <div id="visionGrid" class="vision-grid"></div>
+
+  </div>
+
+</div>
+
+<script src="vision.js"></script>
+
+</body>
+</html>

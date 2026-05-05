@@ -429,7 +429,7 @@ body {
 
 .vision-grid {
   display: grid;
-  gap: 3px;
+  gap: 1.5px;
 
   width: 100%;
   flex: 1;              /* 👈 allows expansion */
@@ -437,7 +437,7 @@ body {
   align-content: start;
 }
 .vision-grid {
-  padding: 2px;
+  padding: 1.5px;
 }
 .vision-grid {
   grid-auto-rows: 1fr;
@@ -452,7 +452,7 @@ body {
   width: 100%;
   aspect-ratio: 1 / 1;
 
-  border-radius: 4px; /* sharper = more collage */
+  border-radius: 0px; /* sharper = more collage */
 
   overflow: hidden;
 
@@ -473,6 +473,7 @@ body {
 }
 
 .vision-tile img {
+  filter: contrast(1.02) saturate(1.05);
   width: 100%;
   height: 100%;
 

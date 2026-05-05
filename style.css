@@ -528,16 +528,52 @@ body {
   color: white;
 }
 
-.draggable-title {
-  cursor: grab;
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+/* =========================
+   💖 DRAGGABLE TITLE BASE
+========================= */
 
-  z-index: 10;
+.draggable-title {
+  position: absolute;
+  cursor: grab;
+  z-index: 20;
+
+  user-select: none;
 }
 
 .draggable-title:active {
   cursor: grabbing;
+}
+
+/* =========================
+   🎀 TITLE STYLE SYSTEM
+========================= */
+
+.title-plain {
+  background: none;
+  padding: 0;
+  border: none;
+}
+
+.title-pill {
+  background: rgba(255,255,255,0.85);
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+
+.title-outline {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.2);
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.title-soft {
+  background: rgba(255,255,255,0.6);
+  padding: 6px 12px;
+  border-radius: 14px;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  backdrop-filter: blur(10px);
 }

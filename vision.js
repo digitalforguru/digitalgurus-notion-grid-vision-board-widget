@@ -263,21 +263,6 @@ tabs.forEach(tab => {
   });
 });
 
-document.querySelectorAll(".icon-option").forEach(icon => {
-  icon.addEventListener("click", () => {
-    const id = icon.dataset.icon;
-
-    state.stickers.push({
-      id: Date.now(),
-      icon: id,
-      x: 50,
-      y: 50
-    });
-
-    renderStickers();
-  });
-});
-
 function renderStickers() {
   const board = document.getElementById("visionGrid");
 
@@ -442,7 +427,14 @@ function renderStickers() {
   state.stickers.forEach(sticker => {
     const el = document.createElement("img");
 
-    el.src = sticker.src;
+    const src = sticker.src || `./assets/icons/${sticker.icon}.svg`;
+
+el.src = src;
+
+el.onerror = () => {
+  console.warn("Missing icon:", src);
+  el.style.display = "none";
+};
     el.className = "sticker";
     el.dataset.id = sticker.id;
 

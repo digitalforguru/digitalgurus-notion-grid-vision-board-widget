@@ -273,5 +273,39 @@ setWidgetSize(state.widgetSize);
   updateTitle();
   renderBoard();
 }
+/* ---------------- DRAGGABLE TITLE ---------------- */
+
+let isDragging = false;
+let offsetX = 0;
+let offsetY = 0;
+
+titleDisplay?.addEventListener("mousedown", (e) => {
+  isDragging = true;
+
+  const rect = titleDisplay.getBoundingClientRect();
+
+  offsetX = e.clientX - rect.left;
+  offsetY = e.clientY - rect.top;
+
+  titleDisplay.style.position = "absolute";
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+
+  const widgetRect = widget.getBoundingClientRect();
+
+  let x = e.clientX - widgetRect.left - offsetX;
+  let y = e.clientY - widgetRect.top - offsetY;
+
+  titleDisplay.style.left = `${x}px`;
+  titleDisplay.style.top = `${y}px`;
+  titleDisplay.style.transform = "none";
+});
+
+document.addEventListener("mouseup", () => {
+  isDragging = false;
+});
 
 init();
+

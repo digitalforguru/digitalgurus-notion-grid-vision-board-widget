@@ -272,7 +272,20 @@ function renderStickers() {
   document.querySelectorAll(".sticker").forEach(s => s.remove());
 
   state.stickers.forEach(sticker => {
-  const el = document.createElement("img");
+  const el = document.createElement("div");
+el.className = "sticker";
+  const img = document.createElement("img");
+img.src = src;
+img.onerror = () => {
+  console.warn("Missing icon:", src);
+  img.style.display = "none";
+};
+
+img.style.width = "100%";
+img.style.height = "100%";
+img.style.pointerEvents = "none";
+
+el.appendChild(img);
 
   const src = sticker.src || `./assets/icons/${sticker.icon}.svg`;
 
@@ -291,16 +304,19 @@ function renderStickers() {
 
   // 👇 ADD DELETE BUTTON (ONLY BUILDER MODE)
   if (!isEmbed) {
-    const deleteBtn = document.createElement("div");
-    deleteBtn.innerHTML = "×";
-    deleteBtn.className = "sticker-delete";
+  const deleteBtn = document.createElement("div");
+  deleteBtn.innerHTML = "×";
+  deleteBtn.className = "sticker-delete";
 
-    deleteBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
+  deleteBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
 
-      state.stickers = state.stickers.filter(s => s.id !== sticker.id);
-      renderStickers();
-    });
+    state.stickers = state.stickers.filter(s => s.id !== sticker.id);
+    renderStickers();
+  });
+
+  el.appendChild(deleteBtn);
+}
 
     el.appendChild(deleteBtn);
   }

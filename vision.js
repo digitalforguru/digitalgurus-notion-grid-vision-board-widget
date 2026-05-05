@@ -266,62 +266,52 @@ tabs.forEach(tab => {
 });
 
 function renderStickers() {
-  const board = document.getElementById("visionGrid");
-
-  // remove old stickers (but keep images)
   document.querySelectorAll(".sticker").forEach(s => s.remove());
 
   state.stickers.forEach(sticker => {
-  const el = document.createElement("div");
-el.className = "sticker";
-  const img = document.createElement("img");
-img.src = src;
-img.onerror = () => {
-  console.warn("Missing icon:", src);
-  img.style.display = "none";
-};
+    const el = document.createElement("div");
+    el.className = "sticker";
+    el.dataset.id = sticker.id;
 
-img.style.width = "100%";
-img.style.height = "100%";
-img.style.pointerEvents = "none";
+    const src = sticker.src || `./assets/icons/${sticker.icon}.svg`;
 
-el.appendChild(img);
+    const img = document.createElement("img");
+    img.src = src;
 
-  const src = sticker.src || `./assets/icons/${sticker.icon}.svg`;
+    img.onerror = () => {
+      console.warn("Missing icon:", src);
+      el.style.display = "none";
+    };
 
-  el.src = src;
-  el.className = "sticker";
-  el.dataset.id = sticker.id;
+    el.style.position = "absolute";
+    el.style.left = `${sticker.x}px`;
+    el.style.top = `${sticker.y}px`;
+    el.style.width = "60px";
+    el.style.zIndex = 30;
+    el.style.cursor = "grab";
 
-  el.style.position = "absolute";
-  el.style.left = `${sticker.x}px`;
-  el.style.top = `${sticker.y}px`;
-  el.style.width = "60px";
-  el.style.zIndex = 30;
-  el.style.cursor = "grab";
+    el.appendChild(img);
 
-  makeStickerDraggable(el, sticker);
+    // ✅ DRAG
+    makeStickerDraggable(el, sticker);
 
-  // 👇 ADD DELETE BUTTON (ONLY BUILDER MODE)
-  if (!isEmbed) {
-  const deleteBtn = document.createElement("div");
-  deleteBtn.innerHTML = "×";
-  deleteBtn.className = "sticker-delete";
+    // ✅ DELETE BUTTON (ONLY BUILDER MODE)
+    if (!isEmbed) {
+      const deleteBtn = document.createElement("div");
+      deleteBtn.innerHTML = "×";
+      deleteBtn.className = "sticker-delete";
 
-  deleteBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
+      deleteBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
 
-    state.stickers = state.stickers.filter(s => s.id !== sticker.id);
-    renderStickers();
-  });
+        state.stickers = state.stickers.filter(s => s.id !== sticker.id);
+        renderStickers();
+      });
 
-  el.appendChild(deleteBtn);
-}
+      el.appendChild(deleteBtn);
+    }
 
-    el.appendChild(deleteBtn);
-  }
-
-  widget.appendChild(el);
+    widget.appendChild(el);
   });
 }
 
@@ -444,49 +434,7 @@ document.querySelectorAll(".icon-option").forEach(el => {
   el.addEventListener("click", () => {
     const iconId = el.dataset.icon;
 
-    const sticker = {
-      id: Date.now() + Math.random(),
-      src: `./assets/icons/${iconId}.svg`,
-      x: 120,
-      y: 120,
-      scale: 1,
-      rotation: 0
-    };
-
-    state.stickers.push(sticker);
-    renderStickers();
-  });
-});
-function renderStickers() {
-  // remove old
-  document.querySelectorAll(".sticker").forEach(s => s.remove());
-
-  state.stickers.forEach(sticker => {
-    const el = document.createElement("img");
-
-    const src = sticker.src || `./assets/icons/${sticker.icon}.svg`;
-
-el.src = src;
-
-el.onerror = () => {
-  console.warn("Missing icon:", src);
-  el.style.display = "none";
-};
-    el.className = "sticker";
-    el.dataset.id = sticker.id;
-
-    el.style.position = "absolute";
-    el.style.left = `${sticker.x}px`;
-    el.style.top = `${sticker.y}px`;
-    el.style.width = "60px";
-    el.style.zIndex = 30;
-    el.style.cursor = "grab";
-
-    makeStickerDraggable(el, sticker);
-
-    widget.appendChild(el); // 👈 IMPORTANT (on top of everything)
-  });
-}
+  
 function makeStickerDraggable(el, sticker) {
   let dragging = false;
   let offsetX = 0;

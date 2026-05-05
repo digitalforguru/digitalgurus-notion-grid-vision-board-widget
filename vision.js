@@ -430,41 +430,7 @@ document.addEventListener("click", (e) => {
     fontOptions?.classList.add("hidden");
   }
 });
-document.querySelectorAll(".icon-option").forEach(el => {
-  el.addEventListener("click", () => {
-    const iconId = el.dataset.icon;
 
-    const sticker = {
-      id: Date.now() + Math.random(),
-      src: `./assets/icons/${iconId}.svg`,
-      x: 120,
-      y: 120,
-      scale: 1,
-      rotation: 0
-    };
-
-    state.stickers.push(sticker);
-    renderStickers();
-  });
-});
-
-  document.addEventListener("mousemove", (e) => {
-    if (!dragging) return;
-
-    const widgetRect = widget.getBoundingClientRect();
-
-    sticker.x = e.clientX - widgetRect.left - offsetX;
-    sticker.y = e.clientY - widgetRect.top - offsetY;
-
-    el.style.left = `${sticker.x}px`;
-    el.style.top = `${sticker.y}px`;
-  });
-
-  document.addEventListener("mouseup", () => {
-    dragging = false;
-    el.style.cursor = "grab";
-  });
-}
 /* ---------------- EMBED LINK ---------------- */
 function buildEmbedURL() {
   const base = window.location.origin + window.location.pathname;

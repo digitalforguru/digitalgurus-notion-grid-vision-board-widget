@@ -293,18 +293,23 @@ function renderStickers() {
 
     const img = document.createElement("img");
     img.src = src;
+    img.style.width = "100%";
+    img.style.height = "100%";
+    img.style.objectFit = "contain";
 
     img.onerror = () => {
       console.warn("Missing icon:", src);
       el.style.display = "none";
     };
 
+    el.style.width = "40px";
+    el.style.height = "40px";
     el.style.position = "absolute";
     el.style.left = `${sticker.x}px`;
     el.style.top = `${sticker.y}px`;
-    el.style.width = "60px";
     el.style.zIndex = 30;
     el.style.cursor = "grab";
+    el.style.filter = "drop-shadow(0 2px 6px rgba(0,0,0,0.15))";
 
     el.appendChild(img);
 

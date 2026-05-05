@@ -72,6 +72,7 @@ let state = {
   gridSize: parseInt(params.get("gridSize")) || 3,
   tiles: [],
   widgetSize: params.get("widgetSize") || "medium",
+  titleStyle: params.get("titleStyle") || "plain",
 };
 
 async function uploadImage(file) {
@@ -91,6 +92,19 @@ async function uploadImage(file) {
     .getPublicUrl(fileName);
 
   return data.publicUrl;
+}
+
+function setTitleStyle(style) {
+  state.titleStyle = style;
+
+  titleDisplay.classList.remove(
+    "title-plain",
+    "title-pill",
+    "title-outline",
+    "title-soft"
+  );
+
+  titleDisplay.classList.add(`title-${style}`);
 }
 
 function setWidgetSize(size) {
@@ -240,9 +254,14 @@ function buildEmbedURL() {
 
   const tiles = encodeURIComponent(JSON.stringify(state.tiles));
 
-  return `${base}?title=${encodeURIComponent(state.title)}&gridSize=${state.gridSize}&tiles=${tiles}&theme=${state.theme}&font=${state.font}&widgetSize=${state.widgetSize}&embed=true`;
+  return `${base}?title=${encodeURIComponent(state.title)}&gridSize=${state.gridSize}&tiles=${tiles}&theme=${state.theme}&font=${state.font}&widgetSize=${state.widgetSize}&titleStyle=${state.titleStyle}&embed=true`;
 }
 
+document.querySelectorAll("#titleStyleOptions .pill-option").forEach(el => {
+  el.addEventListener("click", () => {
+    setTitleStyle(el.dataset.style);
+  });
+});
 /* ---------------- COPY ---------------- */
 copyBtn?.addEventListener("click", () => {
   navigator.clipboard.writeText(buildEmbedURL());
@@ -265,6 +284,7 @@ function init() {
 setWidgetSize(state.widgetSize);
   if (titleInput) titleInput.value = state.title;
 setWidgetSize(state.widgetSize);
+setTitleStyle(state.titleStyle);
 
   setTheme(state.theme);
   setFont(state.font);

@@ -661,3 +661,49 @@ body {
   height: auto;
 }
 
+.icon-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 6px;
+
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+
+  border-radius: 14px;
+  width: fit-content;
+
+  margin-bottom: 10px;
+}
+
+/* each tab */
+.icon-tab {
+  font-size: 11px;
+  text-transform: lowercase;
+  letter-spacing: 0.3px;
+
+  padding: 5px 10px;
+  border-radius: 10px;
+
+  cursor: pointer;
+  user-select: none;
+
+  color: rgba(0, 0, 0, 0.55);
+
+  transition: all 0.2s ease;
+}
+
+/* hover state */
+.icon-tab:hover {
+  background: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.75);
+}
+
+/* ACTIVE TAB = main character energy */
+.icon-tab.active {
+  background: rgba(255, 255, 255, 0.85);
+  color: rgba(0, 0, 0, 0.85);
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+  transform: translateY(-1px);
+}

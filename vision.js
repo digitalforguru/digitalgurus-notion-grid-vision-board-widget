@@ -272,21 +272,40 @@ function renderStickers() {
   document.querySelectorAll(".sticker").forEach(s => s.remove());
 
   state.stickers.forEach(sticker => {
-    const el = document.createElement("img");
+  const el = document.createElement("img");
 
-    el.src = `./assets/icons/${sticker.icon}.svg`;
-    el.classList.add("sticker");
+  const src = sticker.src || `./assets/icons/${sticker.icon}.svg`;
 
-    el.style.position = "absolute";
-    el.style.left = sticker.x + "px";
-    el.style.top = sticker.y + "px";
-    el.style.width = "32px";
-    el.style.height = "32px";
-    el.style.cursor = "grab";
+  el.src = src;
+  el.className = "sticker";
+  el.dataset.id = sticker.id;
 
-    makeDraggable(el, sticker);
+  el.style.position = "absolute";
+  el.style.left = `${sticker.x}px`;
+  el.style.top = `${sticker.y}px`;
+  el.style.width = "60px";
+  el.style.zIndex = 30;
+  el.style.cursor = "grab";
 
-    document.getElementById("widget").appendChild(el);
+  makeStickerDraggable(el, sticker);
+
+  // 👇 ADD DELETE BUTTON (ONLY BUILDER MODE)
+  if (!isEmbed) {
+    const deleteBtn = document.createElement("div");
+    deleteBtn.innerHTML = "×";
+    deleteBtn.className = "sticker-delete";
+
+    deleteBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      state.stickers = state.stickers.filter(s => s.id !== sticker.id);
+      renderStickers();
+    });
+
+    el.appendChild(deleteBtn);
+  }
+
+  widget.appendChild(el);
   });
 }
 

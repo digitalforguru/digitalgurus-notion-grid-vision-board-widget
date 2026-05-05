@@ -71,7 +71,7 @@ let state = {
   font: params.get("font") || "default",
   gridSize: parseInt(params.get("gridSize")) || 3,
   tiles: [],
-  stickers: []
+  stickers: [],
   widgetSize: params.get("widgetSize") || "medium",
   titleStyle: params.get("titleStyle") || "plain",
   titlePosition: params.get("titlePosition") || "top-center",

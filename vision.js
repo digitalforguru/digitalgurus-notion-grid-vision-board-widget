@@ -240,6 +240,98 @@ imageUpload?.addEventListener("change", async (e) => {
   renderBoard();
 });
 
+const tabs = document.querySelectorAll(".icon-tab");
+const icons = document.querySelectorAll(".icon-option");
+
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    const category = tab.dataset.category;
+
+    // active tab styling
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+
+    icons.forEach(icon => {
+      const iconCat = icon.dataset.category;
+
+      if (category === "all" || iconCat === category) {
+        icon.style.display = "flex";
+      } else {
+        icon.style.display = "none";
+      }
+    });
+  });
+});
+
+document.querySelectorAll(".icon-option").forEach(icon => {
+  icon.addEventListener("click", () => {
+    const id = icon.dataset.icon;
+
+    state.stickers.push({
+      id: Date.now(),
+      icon: id,
+      x: 50,
+      y: 50
+    });
+
+    renderStickers();
+  });
+});
+
+function renderStickers() {
+  const board = document.getElementById("visionGrid");
+
+  // remove old stickers (but keep images)
+  document.querySelectorAll(".sticker").forEach(s => s.remove());
+
+  state.stickers.forEach(sticker => {
+    const el = document.createElement("img");
+
+    el.src = `./assets/icons/${sticker.icon}.svg`;
+    el.classList.add("sticker");
+
+    el.style.position = "absolute";
+    el.style.left = sticker.x + "px";
+    el.style.top = sticker.y + "px";
+    el.style.width = "32px";
+    el.style.height = "32px";
+    el.style.cursor = "grab";
+
+    makeDraggable(el, sticker);
+
+    document.getElementById("widget").appendChild(el);
+  });
+}
+
+function makeDraggable(el, sticker) {
+  let isDragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  el.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    offsetX = e.clientX - el.offsetLeft;
+    offsetY = e.clientY - el.offsetTop;
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+
+    const x = e.clientX - offsetX;
+    const y = e.clientY - offsetY;
+
+    el.style.left = x + "px";
+    el.style.top = y + "px";
+
+    // update state LIVE
+    sticker.x = x;
+    sticker.y = y;
+  });
+
+  document.addEventListener("mouseup", () => {
+    isDragging = false;
+  });
+}
 /* ---------------- GRID SIZE ---------------- */
 document.querySelectorAll("#messinessOptions .pill-option").forEach(el => {
   el.addEventListener("click", () => {
@@ -401,10 +493,11 @@ function makeStickerDraggable(el, sticker) {
 /* ---------------- EMBED LINK ---------------- */
 function buildEmbedURL() {
   const base = window.location.origin + window.location.pathname;
+  const stickers = encodeURIComponent(JSON.stringify(state.stickers));
 
   const tiles = encodeURIComponent(JSON.stringify(state.tiles));
 
-  return `${base}?title=${encodeURIComponent(state.title)}&gridSize=${state.gridSize}&tiles=${tiles}&theme=${state.theme}&font=${state.font}&widgetSize=${state.widgetSize}&titleStyle=${state.titleStyle}&titlePosition=${state.titlePosition}&messiness=${state.messiness}&embed=true`;
+  return `${base}?title=${encodeURIComponent(state.title)}&gridSize=${state.gridSize}&tiles=${tiles}&theme=${state.theme}&font=${state.font}&widgetSize=${state.widgetSize}&titleStyle=${state.titleStyle}&titlePosition=${state.titlePosition}&messiness=${state.messiness}&stickers=${stickers}&embed=true`;
 }
 
 document.querySelectorAll("#titleStyleOptions .pill-option").forEach(el => {
@@ -434,6 +527,13 @@ function init() {
   setWidgetSize(state.widgetSize);
 
   if (titleInput) titleInput.value = state.title;
+  if (params.get("stickers")) {
+  try {
+    state.stickers = JSON.parse(decodeURIComponent(params.get("stickers")));
+  } catch (e) {
+    state.stickers = [];
+  }
+}
 
   setTitleStyle(state.titleStyle);
   setTitlePosition(state.titlePosition);

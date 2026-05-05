@@ -372,8 +372,6 @@ setTitleStyle(state.titleStyle);
   updateTitle();
   renderBoard();
   applyMessiness();
-  
-});
 }
 /* ---------------- DRAGGABLE TITLE ---------------- */
 

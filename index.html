@@ -16,45 +16,52 @@
 
 <div id="themeOptions" class="sign-popup hidden">
   <div class="sign-title">select theme</div>
+
   <div class="themes-row">
-  <div class="theme-circle pink" data-theme="pink"></div>
-  <div class="theme-circle beige" data-theme="beige"></div>
-  <div class="theme-circle blue" data-theme="blue"></div>
-  <div class="theme-circle green" data-theme="green"></div>
+    <div class="theme-circle pink" data-theme="pink"></div>
+    <div class="theme-circle beige" data-theme="beige"></div>
+    <div class="theme-circle blue" data-theme="blue"></div>
+    <div class="theme-circle green" data-theme="green"></div>
+  </div>
 </div>
 
 <div id="fontOptions" class="sign-popup hidden">
   <div class="sign-title">select font</div>
+
   <div class="font-list">
-  <div class="font-option" data-font="default">default</div>
-  <div class="font-option" data-font="serif">serif</div>
-  <div class="font-option" data-font="mono">mono</div>
+    <div class="font-option" data-font="default">default</div>
+    <div class="font-option" data-font="serif">serif</div>
+    <div class="font-option" data-font="mono">mono</div>
+  </div>
 </div>
 
 <div id="editOptions" class="sign-popup hidden">
   <div class="sign-title">vision board settings</div>
-  <div class="sub-text">
-      upload images ✦ set layout ✦ build your aesthetic board
-    </div>
 
- <div class="input-group">
-   <label>board title</label>
-   <input type="text" id="boardTitle" placeholder="e.g. 2026 glow up ✨" />
-    </div>
+  <div class="sub-text">
+    upload images ✦ set layout ✦ build your aesthetic board
+  </div>
+
+  <div class="input-group">
+    <label>board title</label>
+    <input type="text" id="boardTitle" />
+  </div>
 
   <div class="input-group">
     <label>add images</label>
-    <input type="file" id="imageUpload" accept="image/*" multiple />
-    </div>
+    <input type="file" id="imageUpload" multiple />
+  </div>
+
   <div class="input-group">
-      <label>grid size</label>
-      <select id="gridSizeSelect">
-        <option value="2">2 x 2</option>
-        <option value="3" selected>3 x 3</option>
-        <option value="4">4 x 4</option>
-        <option value="5">5 x 5</option>
-      </select>
-    </div>
+    <label>grid size</label>
+    <select id="gridSizeSelect">
+      <option value="2">2 x 2</option>
+      <option value="3" selected>3 x 3</option>
+      <option value="4">4 x 4</option>
+      <option value="5">5 x 5</option>
+    </select>
+  </div>
+</div>
 
 
   <div id="usageTip" class="usage-tip">

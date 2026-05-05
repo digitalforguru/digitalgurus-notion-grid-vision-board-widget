@@ -76,6 +76,8 @@ let state = {
   titleStyle: params.get("titleStyle") || "plain",
   titlePosition: params.get("titlePosition") || "top-center",
   messiness: parseInt(params.get("messiness")) || 0,
+  titleX: parseFloat(params.get("titleX")) || null,
+titleY: parseFloat(params.get("titleY")) || null,
 };
 
 async function uploadImage(file) {
@@ -489,7 +491,7 @@ function buildEmbedURL() {
 
   const tiles = encodeURIComponent(JSON.stringify(state.tiles));
 
-  return `${base}?title=${encodeURIComponent(state.title)}&gridSize=${state.gridSize}&tiles=${tiles}&theme=${state.theme}&font=${state.font}&widgetSize=${state.widgetSize}&titleStyle=${state.titleStyle}&titlePosition=${state.titlePosition}&messiness=${state.messiness}&stickers=${stickers}&embed=true`;
+  return `${base}?title=${encodeURIComponent(state.title)}&gridSize=${state.gridSize}&tiles=${tiles}&theme=${state.theme}&font=${state.font}&widgetSize=${state.widgetSize}&titleStyle=${state.titleStyle}&titlePosition=${state.titlePosition}&messiness=${state.messiness}&stickers=${stickers}&titleX=${state.titleX ?? ""}&titleY=${state.titleY ?? ""}&embed=true`;
 }
 
 document.querySelectorAll("#titleStyleOptions .pill-option").forEach(el => {
@@ -535,9 +537,17 @@ function init() {
 
   updateGrid();
   updateTitle();
-  renderBoard();
-  renderStickers(); // 👈 NEW
-  applyMessiness();
+
+if (state.titleX !== null && state.titleY !== null) {
+  titleDisplay.style.position = "absolute";
+  titleDisplay.style.left = `${state.titleX}px`;
+  titleDisplay.style.top = `${state.titleY}px`;
+  titleDisplay.style.transform = "none";
+}
+
+renderBoard();
+renderStickers();
+applyMessiness();
 }
 /* ---------------- DRAGGABLE TITLE ---------------- */
 
@@ -567,6 +577,10 @@ document.addEventListener("mousemove", (e) => {
   titleDisplay.style.left = `${x}px`;
   titleDisplay.style.top = `${y}px`;
   titleDisplay.style.transform = "none";
+
+  // 🔥 SAVE POSITION LIVE
+  state.titleX = x;
+  state.titleY = y;
 });
 
 document.addEventListener("mouseup", () => {

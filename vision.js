@@ -342,11 +342,18 @@ function makeDraggable(el, sticker) {
   let offsetY = 0;
 
   el.addEventListener("mousedown", (e) => {
-    isDragging = true;
-    offsetX = e.clientX - el.offsetLeft;
-    offsetY = e.clientY - el.offsetTop;
-  });
+  isDragging = true;
 
+  const rect = el.getBoundingClientRect();
+  const widgetRect = widget.getBoundingClientRect();
+
+  offsetX = e.clientX - rect.left;
+  offsetY = e.clientY - rect.top;
+
+  // store widget reference position baseline
+  el._widgetRect = widgetRect;
+});
+  
  document.addEventListener("mousemove", (e) => {
   if (!isDragging) return;
 
@@ -355,7 +362,7 @@ function makeDraggable(el, sticker) {
   let x = e.clientX - widgetRect.left - offsetX;
   let y = e.clientY - widgetRect.top - offsetY;
 
-  // 🧱 CLAMP inside widget (this is the magic fix)
+  // keep inside widget bounds
   x = Math.max(0, Math.min(x, widgetRect.width - el.offsetWidth));
   y = Math.max(0, Math.min(y, widgetRect.height - el.offsetHeight));
 

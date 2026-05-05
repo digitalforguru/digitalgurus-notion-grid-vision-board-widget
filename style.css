@@ -9,43 +9,27 @@ body {
   height: 100vh;
 }
 
-/* Widget */
 .widget {
-  background-color: #f4dfeb;
-  border-radius: 22px;
+  width: 320px;
+  min-height: 420px;
 
-  padding: 12px;
+  height: auto;          /* 👈 IMPORTANT */
+  max-height: none;      /* 👈 removes hidden restriction */
 
-  width: 180px;
-  height: 180px;
+  border-radius: 24px;
 
-  box-shadow:
-    0 12px 30px rgba(0,0,0,0.12),
-    inset 0 1px 0 rgba(255,255,255,0.4);
+  background: #fffdfc;
 
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 
-  box-sizing: border-box;
+  padding: 18px;
+
+  transition: all 0.3s ease;
 
   position: relative;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  gap: 6px;
-
-  text-align: center;
-  color: #000;
-  font-size: 0.8rem;
-  text-transform: lowercase;
-
-  user-select: none;
-
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  theme-color: #ffffff;
 }
 .widget:hover {
   transform: translateY(-2px) scale(1.01);
@@ -443,23 +427,29 @@ body {
   background: #fafafa;
 }
 
-
 .vision-grid {
   display: grid;
   gap: 8px;
 
   width: 100%;
+  flex: 1;              /* 👈 allows expansion */
+
+  align-content: start;
+}
+.vision-grid {
+  grid-auto-rows: 1fr;
 }
 
 .vision-grid {
   grid-template-columns: repeat(3, 1fr);
 }
 
+
 .vision-tile {
   width: 100%;
   aspect-ratio: 1 / 1;
 
-  border-radius: 14px;
+  border-radius: 6px; /* 👈 sharper (was 14px) */
 
   overflow: hidden;
 
@@ -475,10 +465,13 @@ body {
   height: 100%;
 
   object-fit: cover;
+
+  border-radius: 0; /* 👈 removes image rounding completely */
 }
 
 .vision-tile:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
+  z-index: 2;
 }
 
 .divider {

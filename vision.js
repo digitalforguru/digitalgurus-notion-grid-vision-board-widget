@@ -71,6 +71,7 @@ let state = {
   font: params.get("font") || "default",
   gridSize: parseInt(params.get("gridSize")) || 3,
   tiles: [],
+  stickers: []
   widgetSize: params.get("widgetSize") || "medium",
   titleStyle: params.get("titleStyle") || "plain",
   titlePosition: params.get("titlePosition") || "top-center",
@@ -325,7 +326,78 @@ document.addEventListener("click", (e) => {
     fontOptions?.classList.add("hidden");
   }
 });
+document.querySelectorAll(".icon-option").forEach(el => {
+  el.addEventListener("click", () => {
+    const iconId = el.dataset.icon;
 
+    const sticker = {
+      id: Date.now() + Math.random(),
+      src: `./assets/icons/${iconId}.svg`,
+      x: 120,
+      y: 120,
+      scale: 1,
+      rotation: 0
+    };
+
+    state.stickers.push(sticker);
+    renderStickers();
+  });
+});
+function renderStickers() {
+  // remove old
+  document.querySelectorAll(".sticker").forEach(s => s.remove());
+
+  state.stickers.forEach(sticker => {
+    const el = document.createElement("img");
+
+    el.src = sticker.src;
+    el.className = "sticker";
+    el.dataset.id = sticker.id;
+
+    el.style.position = "absolute";
+    el.style.left = `${sticker.x}px`;
+    el.style.top = `${sticker.y}px`;
+    el.style.width = "60px";
+    el.style.zIndex = 30;
+    el.style.cursor = "grab";
+
+    makeStickerDraggable(el, sticker);
+
+    widget.appendChild(el); // 👈 IMPORTANT (on top of everything)
+  });
+}
+function makeStickerDraggable(el, sticker) {
+  let dragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  el.addEventListener("mousedown", (e) => {
+    dragging = true;
+
+    const rect = el.getBoundingClientRect();
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
+
+    el.style.cursor = "grabbing";
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (!dragging) return;
+
+    const widgetRect = widget.getBoundingClientRect();
+
+    sticker.x = e.clientX - widgetRect.left - offsetX;
+    sticker.y = e.clientY - widgetRect.top - offsetY;
+
+    el.style.left = `${sticker.x}px`;
+    el.style.top = `${sticker.y}px`;
+  });
+
+  document.addEventListener("mouseup", () => {
+    dragging = false;
+    el.style.cursor = "grab";
+  });
+}
 /* ---------------- EMBED LINK ---------------- */
 function buildEmbedURL() {
   const base = window.location.origin + window.location.pathname;
@@ -359,10 +431,11 @@ copyBtn?.addEventListener("click", () => {
 /* ---------------- INIT ---------------- */
 function init() {
   setGridSize(state.gridSize);
-setWidgetSize(state.widgetSize);
+  setWidgetSize(state.widgetSize);
+
   if (titleInput) titleInput.value = state.title;
-setWidgetSize(state.widgetSize);
-setTitleStyle(state.titleStyle);
+
+  setTitleStyle(state.titleStyle);
   setTitlePosition(state.titlePosition);
 
   setTheme(state.theme);
@@ -371,6 +444,7 @@ setTitleStyle(state.titleStyle);
   updateGrid();
   updateTitle();
   renderBoard();
+  renderStickers(); // 👈 NEW
   applyMessiness();
 }
 /* ---------------- DRAGGABLE TITLE ---------------- */

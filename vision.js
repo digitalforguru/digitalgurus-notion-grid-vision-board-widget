@@ -1,4 +1,7 @@
-/* ---------------- ELEMENTS ---------------- */
+const supabaseUrl = "https://fcajhwkmsyztkvyzjhkl.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjYWpod2ttc3l6dGt2eXpqaGtsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc5OTE0ODIsImV4cCI6MjA5MzU2NzQ4Mn0.fbdUZmZbDCi5IhTvtg1AwjIxXefetuk912YEwjJNqbI";
+
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 const widget = document.getElementById("widget");
 
 const grid = document.getElementById("visionGrid");
@@ -32,7 +35,26 @@ let state = {
   tiles: []
 };
 
-/* load tiles safely from URL */
+async function uploadImage(file) {
+  const fileName = `${Date.now()}-${file.name}`;
+
+  const { error } = await supabase.storage
+    .from("vision-images")
+    .upload(fileName, file);
+
+  if (error) {
+    console.error("upload error:", error);
+    return null;
+  }
+
+  const { data } = supabase.storage
+    .from("vision-images")
+    .getPublicUrl(fileName);
+
+  return data.publicUrl;
+}
+
+
 if (params.get("tiles")) {
   try {
     state.tiles = JSON.parse(decodeURIComponent(params.get("tiles")));
@@ -77,18 +99,20 @@ function updateTitle() {
   titleDisplay.textContent = state.title.toLowerCase();
 }
 
-/* ---------------- IMAGE UPLOAD ---------------- */
-imageUpload?.addEventListener("change", (e) => {
+/* ---------------- IMAGE UPLOAD (SUPABASE) ---------------- */
+imageUpload?.addEventListener("change", async (e) => {
   const files = Array.from(e.target.files);
 
-  files.forEach(file => {
-    const url = URL.createObjectURL(file);
+  for (let file of files) {
+    const url = await uploadImage(file);
 
-    state.tiles.push({
-      id: Date.now() + Math.random(),
-      src: url
-    });
-  });
+    if (url) {
+      state.tiles.push({
+        id: Date.now() + Math.random(),
+        src: url
+      });
+    }
+  }
 
   renderBoard();
 });

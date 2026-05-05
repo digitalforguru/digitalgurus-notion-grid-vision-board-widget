@@ -434,21 +434,19 @@ document.querySelectorAll(".icon-option").forEach(el => {
   el.addEventListener("click", () => {
     const iconId = el.dataset.icon;
 
-  
-function makeStickerDraggable(el, sticker) {
-  let dragging = false;
-  let offsetX = 0;
-  let offsetY = 0;
+    const sticker = {
+      id: Date.now() + Math.random(),
+      src: `./assets/icons/${iconId}.svg`,
+      x: 120,
+      y: 120,
+      scale: 1,
+      rotation: 0
+    };
 
-  el.addEventListener("mousedown", (e) => {
-    dragging = true;
-
-    const rect = el.getBoundingClientRect();
-    offsetX = e.clientX - rect.left;
-    offsetY = e.clientY - rect.top;
-
-    el.style.cursor = "grabbing";
+    state.stickers.push(sticker);
+    renderStickers();
   });
+});
 
   document.addEventListener("mousemove", (e) => {
     if (!dragging) return;

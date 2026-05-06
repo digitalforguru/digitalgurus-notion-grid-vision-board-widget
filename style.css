@@ -248,12 +248,49 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+#editOptions {
+  position: absolute;
+  top: 70px;
+  left: 25px;
+
+  transform: none;
+
+  width: 350px;
+}
+
+#themeOptions,
+#fontOptions {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 220px; /* small + compact */
+  max-width: 240px;
+
+  padding: 12px;
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(16px);
+
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+
+  z-index: 50;
+}
+#themeOptions .sign-title,
+#fontOptions .sign-title {
+  font-size: 10px;
+  opacity: 0.6;
+  text-transform: lowercase;
+  text-align: center;
+}
 .sign-popup {
   position: absolute;
 
   top: 70px;
-  left: 25px; /* 👈 anchor to right side */
-
   transform: none;
 
   width: 260px; /* 👈 wider */

@@ -39,16 +39,39 @@
   <div class="sign-title">vision board settings</div>
 
   <div class="sub-text">
-    upload images ✦ set layout ✦ build your aesthetic board
+    upload your images ⋆⋅☆⋅⋆ drag title + icons, select your vision board settings
   </div>
 
   <div class="input-group">
-    <label>board title</label>
+    <label>vision board name</label>
     <input type="text" id="boardTitle" />
   </div>
 
   <div class="input-group">
-    <label>add images</label>
+  <label>name style</label>
+
+  <div class="option-row" id="titleStyleOptions">
+
+    <div class="pill-option" data-style="plain">plain</div>
+    <div class="pill-option" data-style="pill">pill</div>
+    <div class="pill-option" data-style="outline">outline</div>
+    <div class="pill-option" data-style="soft">soft</div>
+  </div>
+</div>
+
+   <div class="input-group">
+  <label>name placement</label>
+
+  <div class="option-row" id="titlePositionOptions">
+
+    <div class="pill-option" data-pos="top-left">top left</div>
+    <div class="pill-option" data-pos="top-center">top center</div>
+    <div class="pill-option" data-pos="center">center</div>
+    <div class="pill-option" data-pos="floating">drag</div>
+  </div>
+
+  <div class="input-group">
+    <label>add your images</label>
     <input type="file" id="imageUpload" multiple />
   </div>
 
@@ -74,31 +97,7 @@
 </div>
   
   <div class="input-group">
-  <label>title style</label>
-
-  <div class="option-row" id="titleStyleOptions">
-
-    <div class="pill-option" data-style="plain">plain</div>
-    <div class="pill-option" data-style="pill">pill</div>
-    <div class="pill-option" data-style="outline">outline</div>
-    <div class="pill-option" data-style="soft">soft</div>
-  </div>
-</div>
-
-  <div class="input-group">
-  <label>title position</label>
-
-  <div class="option-row" id="titlePositionOptions">
-
-    <div class="pill-option" data-pos="top-left">top left</div>
-    <div class="pill-option" data-pos="top-center">top center</div>
-    <div class="pill-option" data-pos="center">center</div>
-    <div class="pill-option" data-pos="floating">drag</div>
-  </div>
-</div>
-  
-  <div class="input-group">
-  <label>messiness</label>
+  <label>edit layout</label>
 
   <div class="option-row" id="messinessOptions">
     <div class="pill-option active" data-mess="0">clean</div>
@@ -109,7 +108,7 @@
 </div>
   <!-- ICON SELECT -->
    <div class="icon-section">
-  <div class="icon-title">select icon</div>
+  <div class="icon-title">select stickers</div>
 
   <!-- CATEGORY TABS -->
   <div class="icon-tabs">

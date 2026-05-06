@@ -44,7 +44,7 @@ body {
 }
 
 .widget.size-small {
-  transform: scale(0.61);
+  transform: scale(0.65);
 }
 
 .widget.size-medium {
@@ -110,19 +110,20 @@ body {
   margin: 10px 0 6px;
 }
 
-
-.theme-toggle-btn {
+.theme-btn {
   width: 20px;
   height: 20px;
 
-  border: 2px solid white;
-
-  background-color: var(--theme-color, #f4dfeb);
-
   border-radius: 50%;
 
+  background-color: #f4dfeb; /* ALWAYS pink */
+  border: 2px solid white;
+
   box-sizing: border-box;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
+
 
 
 .theme-options {

@@ -125,7 +125,21 @@ body {
 }
 
 
+/* make sure theme popup content stays compact */
+#themeOptions {
+  align-items: center;
+}
 
+/* FORCE horizontal row (this is the key bit) */
+#themeOptions .themes-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+  flex-wrap: nowrap; /* prevents it from stretching into a column */
+}
 .theme-options {
   position: absolute;
   top: 68px;

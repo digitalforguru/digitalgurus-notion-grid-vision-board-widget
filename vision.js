@@ -44,6 +44,7 @@ let state = {
   title: params.get("title") || "my vision board",
   theme: params.get("theme") || "beige",
   font: params.get("font") || "default",
+  appearance: params.get("appearance") || "system",
   gridSize: parseInt(params.get("gridSize")) || 3,
   tiles: [],
   stickers: [],
@@ -365,6 +366,7 @@ function closeMenus() {
   editOptions?.classList.add("hidden");
   themeOptions?.classList.add("hidden");
   fontOptions?.classList.add("hidden");
+  appearanceOptions?.classList.add("hidden");
 }
 
 function buildEmbedURL() {
@@ -387,6 +389,7 @@ function buildEmbedURL() {
     `&stickers=${stickers}` +
     `&titleX=${state.titleX ?? ""}` +
     `&titleY=${state.titleY ?? ""}` +
+    `&appearance=${encodeURIComponent(state.appearance)}` +
     `&embed=true`
   );
 }
@@ -562,6 +565,8 @@ appearanceChoices.forEach((option) => {
       fontOptions?.contains(e.target) ||
       editBtn?.contains(e.target) ||
       themeBtn?.contains(e.target) ||
+      appearanceOptions?.contains(e.target) ||
+      appearanceToggle?.contains(e.target) ||
       fontBtn?.contains(e.target) 
     ) {
       return;
@@ -625,6 +630,7 @@ function init() {
 
   setTheme(state.theme);
   setFont(state.font);
+  setAppearance(state.appearance);
 
   updateGrid();
   updateTitle();

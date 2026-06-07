@@ -38,6 +38,10 @@ const isEmbed = params.get("embed") === "true";
 
 if (isEmbed) {
   document.documentElement.classList.add("embed-mode");
+
+  if (widget) {
+    document.body.appendChild(widget);
+  }
 }
 
 let state = {
@@ -152,8 +156,17 @@ function setTitlePosition(pos) {
 
   titleDisplay.classList.add(`title-pos-${state.titlePosition}`);
 
-  titleDisplay.style.cursor =
-    state.titlePosition === "floating" && !isEmbed ? "grab" : "default";
+  if (state.titlePosition !== "floating") {
+    titleDisplay.style.position = "absolute";
+    titleDisplay.style.left = "";
+    titleDisplay.style.top = "";
+    titleDisplay.style.transform = "";
+    titleDisplay.style.cursor = "default";
+    state.titleX = null;
+    state.titleY = null;
+  } else {
+    titleDisplay.style.cursor = isEmbed ? "default" : "grab";
+  }
 
   titlePositionOptions.forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.pos === state.titlePosition);
@@ -285,6 +298,9 @@ function renderStickers() {
     img.style.width = "100%";
     img.style.height = "100%";
     img.style.objectFit = "contain";
+    img.draggable = false;
+img.style.pointerEvents = "none";
+img.style.userSelect = "none";
 
     img.onerror = () => {
       console.warn("missing icon:", src);

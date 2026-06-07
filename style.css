@@ -979,3 +979,12 @@ body.appearance-dark .pill-option.active {
     color: #191919;
   }
 }
+.vision-grid,
+.vision-tile,
+.vision-tile img {
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-user-drag: none !important;
+  touch-action: none !important;
+}

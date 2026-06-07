@@ -6,295 +6,285 @@
   <title>DigitalGuru's Vision Board Widget</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-  <body>
 
+<body>
+  <main class="builder-page">
+    <section class="builder-ui">
 
-<div class="builder-ui">
-    <div class="widget-header">
-  DigitalGuru's Notion Vision Board Widget
-</div>
+      <header class="builder-nav">
+        <a href="https://digitalforguru.github.io/digitalguru-notion-widget-claim-hub/" class="back-link">← back to studio</a>
+        <span class="status-pill">vision board</span>
+      </header>
 
-<div id="themeOptions" class="sign-popup hidden edit-style">
-  <div class="sign-title">select theme</div>
+      <section class="hero-card">
+        <p class="eyebrow">digitalguru widget setup</p>
+        <h1>Vision Board Widget</h1>
+        <p class="hero-subtitle">
+          create a soft scrapbook-style vision board for your Notion dashboard with images, stickers, themes, fonts, and layout options.
+        </p>
+      </section>
 
-  <div class="themes-row">
-    <div class="theme-circle pink" data-theme="pink"></div>
-    <div class="theme-circle beige" data-theme="beige"></div>
-    <div class="theme-circle blue" data-theme="blue"></div>
-    <div class="theme-circle green" data-theme="green"></div>
-    <div class="theme-circle black" data-theme="black"></div>
-    <div class="theme-circle white" data-theme="white"></div>
-  </div>
-</div>
+      <section class="guide-grid">
+        <div class="info-card">
+          <p class="section-label">quick start</p>
+          <h2>How to use it?</h2>
+          <ol>
+            <li>Open settings and add your images.</li>
+            <li>Choose your theme, font, title, stickers, and layout.</li>
+            <li>Copy your embed link and paste it into Notion using <strong>/embed</strong>.</li>
+          </ol>
+        </div>
 
-<div id="fontOptions" class="sign-popup hidden edit-style">
-  <div class="sign-title">select font</div>
+        <div class="info-card">
+          <p class="section-label">dashboard tip</p>
+          <h2>Best placement</h2>
+          <p>This widget looks cutest near a life planner homepage, goals page, manifestation board, or monthly reset section.</p>
+        </div>
+      </section>
 
-  <div class="font-list">
-    <div class="font-option" data-font="default">default</div>
-    <div class="font-option" data-font="serif">serif</div>
-    <div class="font-option" data-font="mono">mono</div>
-  </div>
-</div>
+      <section class="preview-card">
+        <div class="section-heading">
+          <p class="section-label">live preview</p>
+          <h2>See your vision board before copying</h2>
+        </div>
 
-<div id="editOptions" class="sign-popup hidden large">
-  <div class="sign-title">vision board settings</div>
+        <div class="preview-frame">
+          <div id="previewWidget" class="widget pink">
+            <div class="widget-content">
+              <div class="vision-header-row">
+                <div id="previewVisionTitle" class="widget-title">
+                  my vision board
+                </div>
+                <span class="vision-mini-date">dream life ✧</span>
+              </div>
 
-  <div class="sub-text">
-    upload your images ⋆⋅☆⋅⋆ select your vision board settings ⋆⋅☆⋅⋆
-  </div>
+              <div class="divider-line"></div>
 
-  <div class="input-group">
-    <label>vision board name</label>
-    <input type="text" id="boardTitle" />
-  </div>
+              <div class="vision-grid preview-vision-grid">
+                <div class="vision-cell sample one"></div>
+                <div class="vision-cell sample two"></div>
+                <div class="vision-cell sample three"></div>
+                <div class="vision-cell sample four"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <div class="input-group">
-  <label>name style</label>
+      <section class="customize-card">
+        <div class="section-heading">
+          <p class="section-label">customize</p>
+          <h2>Make it match your dashboard</h2>
+        </div>
 
-  <div class="option-row" id="titleStyleOptions">
+        <div class="control-panel">
+          <div class="top-left-controls">
+            <div id="editBtn" class="btn edit-btn" title="edit your vision board">⚙︎</div>
+            <div id="themeBtn" class="btn theme-btn" title="select theme"></div>
+            <div id="appearanceToggle" class="btn appearance-toggle-btn" title="background">bg</div>
+            <div id="fontToggle" class="btn font-toggle-btn" title="font">Aa</div>
+          </div>
 
-    <div class="pill-option" data-style="plain">plain</div>
-    <div class="pill-option" data-style="pill">pill</div>
-    <div class="pill-option" data-style="outline">outline</div>
-    <div class="pill-option" data-style="soft">soft</div>
-  </div>
-</div>
+          <div id="themeOptions" class="theme-options hidden">
+            <div class="theme-circle pink" data-theme="pink"></div>
+            <div class="theme-circle beige" data-theme="beige"></div>
+            <div class="theme-circle blue" data-theme="blue"></div>
+            <div class="theme-circle green" data-theme="green"></div>
+            <div class="theme-circle black" data-theme="black"></div>
+            <div class="theme-circle white" data-theme="white"></div>
+          </div>
 
-   <div class="input-group">
-  <label>name placement</label>
+          <div id="appearanceOptions" class="theme-options hidden appearance-options">
+            <div class="appearance-option" data-appearance="light">light</div>
+            <div class="appearance-option" data-appearance="dark">dark</div>
+            <div class="appearance-option" data-appearance="system">system</div>
+          </div>
 
-  <div class="option-row" id="titlePositionOptions">
+          <div id="fontOptions" class="theme-options hidden">
+            <div class="font-option" data-font="default">default</div>
+            <div class="font-option" data-font="serif">serif</div>
+            <div class="font-option" data-font="mono">mono</div>
+          </div>
 
-    <div class="pill-option" data-pos="top-left">top left</div>
-    <div class="pill-option" data-pos="top-center">top center</div>
-    <div class="pill-option" data-pos="center">center</div>
-    <div class="pill-option" data-pos="floating">drag</div>
-  </div>
-</div>
+          <div id="editOptions" class="settings-popup hidden">
+            <div class="settings-title">vision board settings</div>
+            <div class="sub-text">upload your images, choose your title, and set the vibe ✧</div>
 
-  <div class="input-group">
-    <label>add your images</label>
-    <input type="file" id="imageUpload" multiple />
-  </div>
+            <div class="input-group">
+              <label>vision board name</label>
+              <input type="text" id="boardTitle" placeholder="my vision board" />
+            </div>
 
-  <div class="input-group">
-  <label>grid size</label>
+            <div class="input-group">
+              <label>name style</label>
+              <div class="option-row" id="titleStyleOptions">
+                <div class="pill-option" data-style="plain">plain</div>
+                <div class="pill-option" data-style="pill">pill</div>
+                <div class="pill-option" data-style="outline">outline</div>
+                <div class="pill-option" data-style="soft">soft</div>
+              </div>
+            </div>
 
-  <div class="option-row" id="gridSizeOptions">
-    <div class="pill-option" data-grid="2">2×2</div>
-    <div class="pill-option" data-grid="3">3×3</div>
-    <div class="pill-option" data-grid="4">4×4</div>
-    <div class="pill-option" data-grid="5">5×5</div>
-  </div>
-</div>
+            <div class="input-group">
+              <label>name placement</label>
+              <div class="option-row" id="titlePositionOptions">
+                <div class="pill-option" data-pos="top-left">top left</div>
+                <div class="pill-option" data-pos="top-center">top center</div>
+                <div class="pill-option" data-pos="center">center</div>
+                <div class="pill-option" data-pos="floating">drag</div>
+              </div>
+            </div>
 
- <div class="input-group">
-  <label>widget size</label>
+            <div class="input-group">
+              <label>add your images</label>
+              <input type="file" id="imageUpload" multiple />
+            </div>
 
-  <div class="option-row" id="widgetSizeOptions">
-    <div class="pill-option" data-size="small">small</div>
-    <div class="pill-option" data-size="medium">medium</div>
-    <div class="pill-option" data-size="large">large</div>
-  </div>
-</div>
-  
-  <div class="input-group">
-  <label>edit layout</label>
+            <div class="input-group">
+              <label>grid size</label>
+              <div class="option-row" id="gridSizeOptions">
+                <div class="pill-option" data-grid="2">2×2</div>
+                <div class="pill-option" data-grid="3">3×3</div>
+                <div class="pill-option" data-grid="4">4×4</div>
+                <div class="pill-option" data-grid="5">5×5</div>
+              </div>
+            </div>
 
-  <div class="option-row" id="messinessOptions">
-    <div class="pill-option active" data-mess="0">clean</div>
-    <div class="pill-option" data-mess="1">soft</div>
-    <div class="pill-option" data-mess="2">collage</div>
-    <div class="pill-option" data-mess="3">messy</div>
-  </div>
-</div>
-  <!-- ICON SELECT -->
-   <div class="icon-section">
-  <div class="icon-title">select stickers</div>
+            <div class="input-group">
+              <label>widget size</label>
+              <div class="option-row" id="widgetSizeOptions">
+                <div class="pill-option" data-size="small">small</div>
+                <div class="pill-option" data-size="medium">medium</div>
+                <div class="pill-option" data-size="large">large</div>
+              </div>
+            </div>
 
-  <!-- CATEGORY TABS -->
-  <div class="icon-tabs">
-   <div class="icon-tab active" data-category="all">all</div>
-<div class="icon-tab" data-category="travel">travel</div>
-<div class="icon-tab" data-category="events">events</div>
-<div class="icon-tab" data-category="life">life</div>
-<div class="icon-tab" data-category="productivity">focus</div>
-<div class="icon-tab" data-category="extras">holiday</div>
-  </div>
+            <div class="input-group">
+              <label>edit layout</label>
+              <div class="option-row" id="messinessOptions">
+                <div class="pill-option active" data-mess="0">clean</div>
+                <div class="pill-option" data-mess="1">soft</div>
+                <div class="pill-option" data-mess="2">collage</div>
+                <div class="pill-option" data-mess="3">messy</div>
+              </div>
+            </div>
 
-  <!-- ICON GRID -->
-  <div class="icon-grid">
+            <div class="icon-section">
+              <div class="icon-title">select stickers</div>
 
-    <!-- TRAVEL -->
-    <div class="icon-option" data-icon="1" data-category="events">
-      <img src="./assets/icons/1.svg" />
+              <div class="icon-tabs">
+                <div class="icon-tab active" data-category="all">all</div>
+                <div class="icon-tab" data-category="travel">travel</div>
+                <div class="icon-tab" data-category="events">events</div>
+                <div class="icon-tab" data-category="life">life</div>
+                <div class="icon-tab" data-category="productivity">focus</div>
+                <div class="icon-tab" data-category="extras">holiday</div>
+              </div>
+
+              <div class="icon-grid">
+                <div class="icon-option" data-icon="1" data-category="events"><img src="./assets/icons/1.svg" /></div>
+                <div class="icon-option" data-icon="2" data-category="events"><img src="./assets/icons/2.svg" /></div>
+                <div class="icon-option" data-icon="3" data-category="events"><img src="./assets/icons/3.svg" /></div>
+                <div class="icon-option" data-icon="4" data-category="travel"><img src="./assets/icons/4.svg" /></div>
+                <div class="icon-option" data-icon="5" data-category="travel"><img src="./assets/icons/5.svg" /></div>
+                <div class="icon-option" data-icon="6" data-category="travel"><img src="./assets/icons/6.svg" /></div>
+                <div class="icon-option" data-icon="7" data-category="travel"><img src="./assets/icons/7.svg" /></div>
+                <div class="icon-option" data-icon="8" data-category="travel"><img src="./assets/icons/8.svg" /></div>
+                <div class="icon-option" data-icon="9" data-category="productivity"><img src="./assets/icons/9.svg" /></div>
+                <div class="icon-option" data-icon="10" data-category="events"><img src="./assets/icons/10.svg" /></div>
+                <div class="icon-option" data-icon="11" data-category="productivity"><img src="./assets/icons/11.svg" /></div>
+                <div class="icon-option" data-icon="12" data-category="productivity"><img src="./assets/icons/12.svg" /></div>
+                <div class="icon-option" data-icon="13" data-category="life"><img src="./assets/icons/13.svg" /></div>
+                <div class="icon-option" data-icon="14" data-category="extras"><img src="./assets/icons/14.svg" /></div>
+                <div class="icon-option" data-icon="15" data-category="extras"><img src="./assets/icons/15.svg" /></div>
+                <div class="icon-option" data-icon="16" data-category="events"><img src="./assets/icons/16.svg" /></div>
+                <div class="icon-option" data-icon="17" data-category="productivity"><img src="./assets/icons/17.svg" /></div>
+                <div class="icon-option" data-icon="18" data-category="productivity"><img src="./assets/icons/18.svg" /></div>
+                <div class="icon-option" data-icon="19" data-category="events"><img src="./assets/icons/19.svg" /></div>
+                <div class="icon-option" data-icon="20" data-category="life"><img src="./assets/icons/20.svg" /></div>
+                <div class="icon-option" data-icon="21" data-category="productivity"><img src="./assets/icons/21.svg" /></div>
+                <div class="icon-option" data-icon="22" data-category="life"><img src="./assets/icons/22.svg" /></div>
+                <div class="icon-option" data-icon="23" data-category="events"><img src="./assets/icons/23.svg" /></div>
+                <div class="icon-option" data-icon="24" data-category="productivity"><img src="./assets/icons/24.svg" /></div>
+                <div class="icon-option" data-icon="25" data-category="productivity"><img src="./assets/icons/25.svg" /></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="setup-card">
+        <div class="section-heading">
+          <p class="section-label">embed</p>
+          <h2>Copy your Notion link</h2>
+        </div>
+
+        <button id="copyLinkBtn" class="copy-btn">
+          copy my embed Notion link .ᐟ.ᐟ
+        </button>
+
+        <p id="copyMessage" class="copy-message hidden">
+          copied! paste into Notion .ᐟ.ᐟ
+        </p>
+      </section>
+
+      <section class="faq-card">
+        <p class="section-label">help</p>
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>How do I add this to Notion?</summary>
+          <p>Copy your embed link, go to Notion, type /embed, paste the link, and confirm!</p>
+        </details>
+
+        <details>
+          <summary>Can I upload my own images?</summary>
+          <p>Yes! Open settings, upload your images, and copy your embed link once your board looks right.</p>
+        </details>
+
+        <details>
+          <summary>Can I change the layout?</summary>
+          <p>Yes! You can change the title, grid size, widget size, stickers, and collage style.</p>
+        </details>
+      </section>
+
+      <section class="updates-card">
+        <p class="section-label">recent updates</p>
+        <h2>Vision Board Widget v1.0</h2>
+        <ul>
+          <li>Added image uploads.</li>
+          <li>Added scrapbook layout options.</li>
+          <li>Added matching Notion-style themes, fonts, and board settings.</li>
+        </ul>
+      </section>
+
+      <footer class="footer-links">
+        <a href="https://digitalforguru.github.io/digitalguru-notion-widget-claim-hub/" class="footer-link">Back to Widget Studio</a>
+        <span class="divider">•</span>
+        <a href="https://stan.store/digitalforguru" target="_blank" class="footer-link">shop digitalguru</a>
+        <span class="divider">•</span>
+        <a href="https://tiktok.com/@digitaluru" target="_blank" class="footer-link">TikTok</a>
+      </footer>
+
+    </section>
+  </main>
+
+  <div id="widget" class="widget pink embed-widget">
+    <div class="widget-content">
+      <div class="vision-header-row">
+        <div id="visionTitle" class="widget-title draggable-title">
+          my vision board
+        </div>
+        <span class="vision-mini-date">dream life ✧</span>
+      </div>
+
+      <div class="divider-line"></div>
+
+      <div id="visionGrid" class="vision-grid"></div>
     </div>
-
-    <div class="icon-option" data-icon="2" data-category="events">
-      <img src="./assets/icons/2.svg" />
-    </div>
-
-    <!-- EVENTS -->
-    <div class="icon-option" data-icon="3" data-category="events">
-      <img src="./assets/icons/3.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="4" data-category="travel">
-      <img src="./assets/icons/4.svg" />
-    </div>
-
-    <!-- LIFE -->
-    <div class="icon-option" data-icon="5" data-category="travel">
-      <img src="./assets/icons/5.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="6" data-category="travel">
-      <img src="./assets/icons/6.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="7" data-category="travel">
-      <img src="./assets/icons/7.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="8" data-category="travel">
-      <img src="./assets/icons/8.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="9" data-category="productivity">
-      <img src="./assets/icons/9.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="10" data-category="events">
-      <img src="./assets/icons/10.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="11" data-category="productivity">
-      <img src="./assets/icons/11.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="12" data-category="productivity">
-      <img src="./assets/icons/12.svg" />
-    </div>
-
-     <div class="icon-option" data-icon="13" data-category="life">
-      <img src="./assets/icons/13.svg" />
-    </div>
-
-     <div class="icon-option" data-icon="14" data-category="extras">
-      <img src="./assets/icons/14.svg" />
-    </div>
-
-     <div class="icon-option" data-icon="15" data-category="extras">
-      <img src="./assets/icons/15.svg" />
-    </div>
-
-     <div class="icon-option" data-icon="16" data-category="events">
-      <img src="./assets/icons/16.svg" />
-    </div>
-
-     <div class="icon-option" data-icon="17" data-category="productivity">
-      <img src="./assets/icons/17.svg" />
-    </div>
-
-     <div class="icon-option" data-icon="18" data-category="productivity">
-      <img src="./assets/icons/18.svg" />
-    </div>
-
-     <div class="icon-option" data-icon="19" data-category="events">
-      <img src="./assets/icons/19.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="20" data-category="life">
-      <img src="./assets/icons/20.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="21" data-category="productivity">
-      <img src="./assets/icons/21.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="22" data-category="life">
-      <img src="./assets/icons/22.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="23" data-category="events">
-      <img src="./assets/icons/23.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="24" data-category="productivity">
-      <img src="./assets/icons/24.svg" />
-    </div>
-
-    <div class="icon-option" data-icon="25" data-category="productivity">
-      <img src="./assets/icons/25.svg" />
-    </div>
-
-  </div>
-</div>
-
-</div>
-
-
- <div id="usageTip" class="usage-tip">
-    Welcome to your Notion widget by DigitalGuru!<br>
-    create your vision board with our layout built for Notion<br>
-    - click options to customize (all options match Notion pages, eg; colors, fonts)<br>
-    - copy your embed link<br>
-    - paste into Notion ✧
-  </div>
-    
-    <div class="top-left-controls">
-  
-  <div id="editBtn" class="btn edit-btn" title="edit your vision board">⚙︎</div>
-
-  <div id="themeBtn" class="btn theme-btn" title="select theme"></div>
-
-  <div id="fontToggle" class="btn font-toggle-btn" title="font">Aa</div>
-
-</div>
-
-
-  <div class="setup-area">
-    <button id="copyLinkBtn" class="copy-btn">
-      copy my embed Notion link .ᐟ.ᐟ
-    </button>
-
-    <p id="copyMessage" class="copy-message hidden">
-      copied! paste into notion .ᐟ.ᐟ
-    </p>
-  </div>
-
-  <div class="footer-links">
-
-  <a href="https://stan.store/digitalforguru" target="_blank" class="footer-link">
-    shop digitalguru
-  </a>
-
-  <span class="divider">•</span>
-
-  <a href="https://tiktok.com/@digitaluru" target="_blank" class="footer-link">
-    socials
-  </a>
-  
-</div>
-
-  </div>
-
-  
-<div id="widget" class="widget">
-
-  <div class="widget-content">
-    <div id="visionTitle" class="widget-title draggable-title">
-      my vision board
-    </div>
-    <div class="divider-line"></div>
-    <div id="visionGrid" class="vision-grid"></div>
   </div>
 
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="vision.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="vision.js"></script>
 </body>
 </html>

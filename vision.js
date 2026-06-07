@@ -26,6 +26,9 @@ const widgetOptions = document.querySelectorAll(".pill-option[data-size]");
 const messinessOptions = document.querySelectorAll("#messinessOptions .pill-option");
 const titleStyleOptions = document.querySelectorAll("#titleStyleOptions .pill-option");
 const titlePositionOptions = document.querySelectorAll("#titlePositionOptions .pill-option");
+const appearanceToggle = document.getElementById("appearanceToggle");
+const appearanceOptions = document.getElementById("appearanceOptions");
+const appearanceChoices = document.querySelectorAll(".appearance-option");
 
 const tabs = document.querySelectorAll(".icon-tab");
 const icons = document.querySelectorAll(".icon-option");
@@ -156,6 +159,17 @@ function setTitlePosition(pos) {
   });
 }
 
+function setAppearance(appearance) {
+  state.appearance = appearance || "system";
+
+  document.body.classList.remove(
+    "appearance-light",
+    "appearance-dark",
+    "appearance-system"
+  );
+
+  document.body.classList.add(`appearance-${state.appearance}`);
+}
 function setTheme(theme) {
   state.theme = theme || "beige";
 
@@ -422,6 +436,22 @@ if (!isEmbed) {
     themeOptions?.classList.add("hidden");
   });
 
+  appearanceToggle?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  appearanceOptions?.classList.toggle("hidden");
+  editOptions?.classList.add("hidden");
+  themeOptions?.classList.add("hidden");
+  fontOptions?.classList.add("hidden");
+});
+
+appearanceChoices.forEach((option) => {
+  option.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setAppearance(option.dataset.appearance);
+    appearanceOptions?.classList.add("hidden");
+  });
+});
+  
   document.querySelectorAll(".theme-circle").forEach((el) => {
     el.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -532,7 +562,7 @@ if (!isEmbed) {
       fontOptions?.contains(e.target) ||
       editBtn?.contains(e.target) ||
       themeBtn?.contains(e.target) ||
-      fontBtn?.contains(e.target)
+      fontBtn?.contains(e.target) 
     ) {
       return;
     }

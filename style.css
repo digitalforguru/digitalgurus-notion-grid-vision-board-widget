@@ -906,3 +906,76 @@ html.embed-mode .sticker-delete {
   border: 1px solid var(--panel-border);
   white-space: nowrap;
 }
+
+.customize-card,
+.control-panel {
+  position: relative;
+  overflow: visible !important;
+  z-index: 20;
+}
+
+.setup-card {
+  position: relative;
+  z-index: 1;
+}
+
+#editOptions {
+  z-index: 99999 !important;
+}
+
+body.appearance-dark .appearance-option,
+body.appearance-dark .font-option,
+body.appearance-dark .pill-option {
+  background: rgba(255,255,255,0.08);
+  color: var(--panel-text);
+  border-color: rgba(255,255,255,0.12);
+}
+
+body.appearance-dark .appearance-option:hover,
+body.appearance-dark .font-option:hover,
+body.appearance-dark .pill-option:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+body.appearance-dark .pill-option.active {
+  background: rgba(255,255,255,0.9);
+  color: #191919;
+}body.appearance-dark .appearance-option,
+body.appearance-dark .font-option,
+body.appearance-dark .pill-option {
+  background: rgba(255,255,255,0.08);
+  color: var(--panel-text);
+  border-color: rgba(255,255,255,0.12);
+}
+
+body.appearance-dark .appearance-option:hover,
+body.appearance-dark .font-option:hover,
+body.appearance-dark .pill-option:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+body.appearance-dark .pill-option.active {
+  background: rgba(255,255,255,0.9);
+  color: #191919;
+}
+
+@media (prefers-color-scheme: dark) {
+  body.appearance-system .appearance-option,
+  body.appearance-system .font-option,
+  body.appearance-system .pill-option {
+    background: rgba(255,255,255,0.08);
+    color: var(--panel-text);
+    border-color: rgba(255,255,255,0.12);
+  }
+
+  body.appearance-system .appearance-option:hover,
+  body.appearance-system .font-option:hover,
+  body.appearance-system .pill-option:hover {
+    background: rgba(255,255,255,0.15);
+  }
+
+  body.appearance-system .pill-option.active {
+    background: rgba(255,255,255,0.9);
+    color: #191919;
+  }
+}

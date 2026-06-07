@@ -835,8 +835,7 @@ body.appearance-dark::before {
 
 /* EMBED LOCKED DISPLAY */
 
-html.embed-mode,
-html.embed-mode body {
+html.embed-mode {
   width: fit-content !important;
   height: fit-content !important;
   min-width: 0 !important;
@@ -846,6 +845,19 @@ html.embed-mode body {
   overflow: hidden !important;
   background: transparent !important;
   background-color: transparent !important;
+}
+
+html.embed-mode body {
+  width: fit-content !important;
+  height: fit-content !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+
+  background: var(--page-bg) !important;
+  background-color: var(--page-bg) !important;
 }
 
 html.embed-mode body::before,
@@ -861,7 +873,6 @@ html.embed-mode #widget {
 html.embed-mode .sticker-delete {
   display: none !important;
 }
-
 /* MOBILE */
 
 @media (max-width: 700px) {

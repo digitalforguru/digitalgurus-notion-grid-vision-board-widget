@@ -903,11 +903,18 @@ html.embed-mode .sticker-delete {
   overflow: visible !important;
 }
 
-.sign-popup {
-  z-index: 9999 !important;
+.sign-popup,
+#editOptions,
+#themeOptions,
+#fontOptions,
+#appearanceOptions {
+  z-index: 99999 !important;
 }
 
-#editOptions {
+#editOptions,
+#themeOptions,
+#fontOptions,
+#appearanceOptions {
   position: absolute !important;
   top: 76px !important;
   left: 50% !important;

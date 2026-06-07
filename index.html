@@ -43,15 +43,27 @@
       </section>
 
       <section class="preview-card">
-        <div class="section-heading">
-          <p class="section-label">live builder</p>
-          <h2>Build your board before copying</h2>
-        </div>
+  <div class="section-heading">
+    <p class="section-label">live builder</p>
+    <h2>Build your board before copying</h2>
+  </div>
 
-        <p class="builder-note">
-          your actual editable vision board is below. everything you upload, drag, and customize will be copied into your embed link.
-        </p>
-      </section>
+  <p class="builder-note">
+    upload, drag, sticker, style, and copy your finished board.
+  </p>
+
+  <div class="preview-frame vision-preview-frame">
+    <div id="widget" class="widget">
+      <div class="widget-content">
+        <div id="visionTitle" class="widget-title draggable-title">
+          my vision board
+        </div>
+        <div class="divider-line"></div>
+        <div id="visionGrid" class="vision-grid"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
       <section class="customize-card">
         <div class="section-heading">
@@ -62,8 +74,9 @@
         <div class="control-panel">
           <div class="top-left-controls">
             <div id="editBtn" class="btn edit-btn" title="edit your vision board">⚙︎</div>
-            <div id="themeBtn" class="btn theme-btn" title="select theme"></div>
-            <div id="fontToggle" class="btn font-toggle-btn" title="font">Aa</div>
+<div id="themeBtn" class="btn theme-btn" title="select theme"></div>
+<div id="appearanceToggle" class="btn appearance-toggle-btn" title="background">bg</div>
+<div id="fontToggle" class="btn font-toggle-btn" title="font">Aa</div>
           </div>
 
           <div id="themeOptions" class="sign-popup hidden edit-style">
@@ -87,6 +100,14 @@
               <div class="font-option" data-font="serif">serif</div>
               <div class="font-option" data-font="mono">mono</div>
             </div>
+            <div id="appearanceOptions" class="sign-popup hidden edit-style">
+  <div class="sign-title">background</div>
+
+  <div class="font-list">
+    <div class="appearance-option" data-appearance="light">light</div>
+    <div class="appearance-option" data-appearance="dark">dark</div>
+    <div class="appearance-option" data-appearance="system">system</div>
+  </div>
           </div>
 
           <div id="editOptions" class="sign-popup hidden large">
@@ -254,16 +275,6 @@
 
     </section>
   </main>
-
-  <div id="widget" class="widget">
-    <div class="widget-content">
-      <div id="visionTitle" class="widget-title draggable-title">
-        my vision board
-      </div>
-      <div class="divider-line"></div>
-      <div id="visionGrid" class="vision-grid"></div>
-    </div>
-  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script src="vision.js"></script>

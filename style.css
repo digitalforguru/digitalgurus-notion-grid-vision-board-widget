@@ -896,3 +896,20 @@ html.embed-mode .sticker-delete {
     max-width: 100%;
   }
 }
+
+.preview-card,
+.customize-card,
+.control-panel {
+  overflow: visible !important;
+}
+
+.sign-popup {
+  z-index: 9999 !important;
+}
+
+#editOptions {
+  position: absolute !important;
+  top: 76px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}

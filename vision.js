@@ -1,6 +1,5 @@
 const supabaseUrl = "https://fcajhwkmsyztkvyzjhkl.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYXNlIiwicmVmIjoiZmNhamh3a21zeXp0a3Z5empoa2wiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTc3Nzk5MTQ4MiwiZXhwIjoyMDkzNTY3NDgyfQ.fbdUZmZbDCi5IhTvtg1AwjIxXefetuk912YEwjJNqbI";
-
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjYWpod2ttc3l6dGt2eXpqaGtsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc5OTE0ODIsImV4cCI6MjA5MzU2NzQ4Mn0.fbdUZmZbDCi5IhTvtg1AwjIxXefetuk912YEwjJNqbI";
 const db = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -263,25 +262,27 @@ document.addEventListener("DOMContentLoaded", () => {
     saveState();
   }
 
-  function renderBoard() {
-    if (!grid) return;
+  ffunction renderBoard() {
+  if (grid) grid.innerHTML = "";
+  if (previewGrid) previewGrid.innerHTML = "";
 
-    grid.innerHTML = "";
+  state.tiles.forEach(tile => {
+    const div = document.createElement("div");
+    div.className = "vision-tile";
 
-    state.tiles.forEach((tile) => {
-      const div = document.createElement("div");
-      div.className = "vision-tile";
+    const img = document.createElement("img");
+    img.src = tile.src;
+    img.alt = "";
 
-      const img = document.createElement("img");
-      img.src = tile.src;
-      img.alt = "";
+    div.appendChild(img);
+    grid?.appendChild(div);
 
-      div.appendChild(img);
-      grid.appendChild(div);
-    });
+    const previewDiv = div.cloneNode(true);
+    previewGrid?.appendChild(previewDiv);
+  });
 
-    applyMessiness();
-  }
+  applyMessiness();
+}
 
   function applyMessiness() {
     const tiles = document.querySelectorAll("#visionGrid .vision-tile");

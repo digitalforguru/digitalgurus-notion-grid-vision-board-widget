@@ -899,9 +899,9 @@ html.embed-mode .sticker-delete {
     grid-template-columns: 1fr;
   }
 
-  .sign-popup.large {
-    width: min(350px, 92vw);
-  }
+.sign-popup.large {
+  width: min(550px, 92vw);
+}
 
   .widget {
     max-width: 100%;
@@ -929,11 +929,17 @@ html.embed-mode .sticker-delete {
   position: relative;
   z-index: 1;
 }
-
 #editOptions {
-  z-index: 99999 !important;
-}
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
 
+  width: min(550px, 92vw) !important;
+  max-height: 80vh !important;
+
+  z-index: 999999 !important;
+}
 body.appearance-dark .appearance-option,
 body.appearance-dark .font-option,
 body.appearance-dark .pill-option {

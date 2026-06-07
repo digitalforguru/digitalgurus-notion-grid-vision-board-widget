@@ -38,10 +38,6 @@ const isEmbed = params.get("embed") === "true";
 
 if (isEmbed) {
   document.documentElement.classList.add("embed-mode");
-
-  if (widget) {
-    document.body.appendChild(widget);
-  }
 }
 
 let state = {
@@ -665,9 +661,13 @@ function init() {
     );
   });
 
-  renderBoard();
+   renderBoard();
   renderStickers();
   applyMessiness();
+
+  if (isEmbed && widget) {
+    document.body.appendChild(widget);
+  }
 }
 
 init();

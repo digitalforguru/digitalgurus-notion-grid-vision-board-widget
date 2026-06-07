@@ -339,11 +339,14 @@ function makeDraggable(el, sticker) {
   let offsetX = 0;
   let offsetY = 0;
 
-  el.addEventListener("mousedown", (e) => {
+  el.addEventListener("pointerdown", (e) => {
     if (isEmbed) return;
 
+    e.preventDefault();
     e.stopPropagation();
+
     isDragging = true;
+    el.setPointerCapture(e.pointerId);
 
     const rect = el.getBoundingClientRect();
 
@@ -351,8 +354,10 @@ function makeDraggable(el, sticker) {
     offsetY = e.clientY - rect.top;
   });
 
-  document.addEventListener("mousemove", (e) => {
+  el.addEventListener("pointermove", (e) => {
     if (!isDragging || !widget) return;
+
+    e.preventDefault();
 
     const widgetRect = widget.getBoundingClientRect();
 
@@ -369,7 +374,12 @@ function makeDraggable(el, sticker) {
     sticker.y = y;
   });
 
-  document.addEventListener("mouseup", () => {
+  el.addEventListener("pointerup", (e) => {
+    isDragging = false;
+    el.releasePointerCapture?.(e.pointerId);
+  });
+
+  el.addEventListener("pointercancel", () => {
     isDragging = false;
   });
 }
@@ -588,17 +598,19 @@ appearanceChoices.forEach((option) => {
   });
 }
 
-/* DRAGGABLE TITLE, BUILDER ONLY */
 let titleDragging = false;
 let titleOffsetX = 0;
 let titleOffsetY = 0;
 
 if (!isEmbed) {
-  titleDisplay?.addEventListener("mousedown", (e) => {
+  titleDisplay?.addEventListener("pointerdown", (e) => {
     if (state.titlePosition !== "floating") return;
 
+    e.preventDefault();
     e.stopPropagation();
+
     titleDragging = true;
+    titleDisplay.setPointerCapture(e.pointerId);
 
     const rect = titleDisplay.getBoundingClientRect();
 
@@ -608,8 +620,10 @@ if (!isEmbed) {
     titleDisplay.style.position = "absolute";
   });
 
-  document.addEventListener("mousemove", (e) => {
+  titleDisplay?.addEventListener("pointermove", (e) => {
     if (!titleDragging || !widget || !titleDisplay) return;
+
+    e.preventDefault();
 
     const widgetRect = widget.getBoundingClientRect();
 
@@ -627,7 +641,12 @@ if (!isEmbed) {
     state.titleY = y;
   });
 
-  document.addEventListener("mouseup", () => {
+  titleDisplay?.addEventListener("pointerup", (e) => {
+    titleDragging = false;
+    titleDisplay.releasePointerCapture?.(e.pointerId);
+  });
+
+  titleDisplay?.addEventListener("pointercancel", () => {
     titleDragging = false;
   });
 }

@@ -1036,3 +1036,6 @@ body.appearance-dark .pill-option.active {
     grid-template-columns: 1fr;
   }
 }
+#editOptions.hidden {
+  display: none !important;
+}

@@ -1039,3 +1039,10 @@ body.appearance-dark .pill-option.active {
 #editOptions.hidden {
   display: none !important;
 }
+
+.sticker,
+.draggable-title {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}

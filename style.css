@@ -1005,3 +1005,34 @@ body.appearance-dark .pill-option.active {
   -webkit-user-drag: none !important;
   touch-action: none !important;
 }
+
+#editOptions {
+  position: fixed !important;
+  top: 45% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+
+  width: min(700px, 94vw) !important;
+  max-height: 82vh !important;
+  padding: 24px !important;
+
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px !important;
+
+  z-index: 999999 !important;
+}
+
+#editOptions .sign-title,
+#editOptions .sub-text,
+#editOptions .icon-section {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 700px) {
+  #editOptions {
+    top: 50% !important;
+    width: min(560px, 92vw) !important;
+    grid-template-columns: 1fr;
+  }
+}

@@ -262,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
     saveState();
   }
 
-  ffunction renderBoard() {
+  function renderBoard() {
   if (grid) grid.innerHTML = "";
   if (previewGrid) previewGrid.innerHTML = "";
 
